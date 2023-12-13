@@ -1,3 +1,12 @@
+#' Title
+#'
+#' @param mhDraws
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 sess <- function(mhDraws, ...){
   #Strip out unecessary info from mhDraws
   mhMCMC <- lapply(mhDraws, function(df){
