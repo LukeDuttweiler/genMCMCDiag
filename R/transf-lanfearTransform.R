@@ -7,13 +7,10 @@ lanfearTransform <- function(mhDraws, distance, reference = NULL, ...){
     #Select a random value from that chain
     mhChain <- mhDraws[[rChain]]
     mhChainVal <- mhChain[grepl('val', names(mhChain))]
-    if(is.data.frame(mhChainVal)){
-      rNum <- sample(1:nrow(mhChainVal), 1)
-      reference <- as.numeric(mhChainVal[rNum,])
-    }else{
-      rNum <- sample(1:length(mhChainVal[[1]]), 1)
-      reference <- mhChainVal[[1]][[rNum]]
-    }
+
+    rNum <- sample(1:length(mhChainVal[[1]]), 1)
+    reference <- mhChainVal[[1]][[rNum]]
+
   }
 
   #Turn each val value into the distance from the reference
