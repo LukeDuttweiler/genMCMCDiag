@@ -1,10 +1,11 @@
-#' Transforms MCMC draws from an mcmcObj into a data.frame using the 'sum' transformation
+#' Transforms a list of mcmcObjs into a list of data.frames using the 'sum' transformation
 #'
-#' @param mhDraws An object of class mcmcObj
+#' @param mhDraws A list of mcmcObjs
 #' @param ... Catches extra arguments. Not used.
 #'
-#' @return data.frame with columns 'val.1' which is the sum of all dimensions of each MCMC
-#' draw, and 'Posterior' which is the (non-normalized) posterior value of each MCMC draw.
+#' @return List of data.frames with columns 'val.1' which is the sum of all dimensions of each MCMC
+#' draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC draw and 't'
+#' which gives the within-chain ordering of the MCMC draws. Each data.frame is a separate chain.
 sumTransform <- function(mhDraws, ...){
   #Turn each val value into sum of the parts
   mhSums <- lapply(mhDraws, function(mhList){

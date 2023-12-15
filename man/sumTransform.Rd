@@ -2,19 +2,20 @@
 % Please edit documentation in R/transf-sumTransform.R
 \name{sumTransform}
 \alias{sumTransform}
-\title{Transforms MCMC draws from an mcmcObj into a data.frame using the 'sum' transformation}
+\title{Transforms a list of mcmcObjs into a list of data.frames using the 'sum' transformation}
 \usage{
 sumTransform(mhDraws, ...)
 }
 \arguments{
-\item{mhDraws}{An object of class mcmcObj}
+\item{mhDraws}{A list of mcmcObjs}
 
 \item{...}{Catches extra arguments. Not used.}
 }
 \value{
-data.frame with columns 'val.1' which is the sum of all dimensions of each MCMC
-draw, and 'Posterior' which is the (non-normalized) posterior value of each MCMC draw.
+List of data.frames with columns 'val.1' which is the sum of all dimensions of each MCMC
+draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC draw and 't'
+which gives the within-chain ordering of the MCMC draws. Each data.frame is a separate chain.
 }
 \description{
-Transforms MCMC draws from an mcmcObj into a data.frame using the 'sum' transformation
+Transforms a list of mcmcObjs into a list of data.frames using the 'sum' transformation
 }

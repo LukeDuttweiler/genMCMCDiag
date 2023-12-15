@@ -1,11 +1,13 @@
-#' Transforms an mcmcObj into a dataframe with no modifications to values
+#' Transforms a list of mcmcObjs into a list of dataframes with no modifications to values
 #'
-#' @param mhDraws An object of class mcmcObj
+#' @param mhDraws An list of mcmcObjs
 #' @param ... Not used.
 #'
-#' @return data.frame with rows that represent MCMC draws. Columns named val.1, val.2,...
-#' contain different dimensions of the draws, column named Posterior contains (non-normalized)
-#' posterior value of the draw
+#' @return A list of data.frames with rows that represent MCMC draws.
+#'  Columns named 'val.1', 'val.2',... contain different dimensions of the draws,
+#'  column named 'Posterior' contains (non-normalized) posterior value of the draw and column
+#'  named 't' gives the within-chain ordering of the draws. Each separate data.frame is a
+#'  different chain.
 standardTransform <- function(mhDraws, ...){
 
   #Will try to force into dataframe of the expected type

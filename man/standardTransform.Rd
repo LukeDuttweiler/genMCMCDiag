@@ -2,20 +2,22 @@
 % Please edit documentation in R/transf-standardTransform.R
 \name{standardTransform}
 \alias{standardTransform}
-\title{Transforms an mcmcObj into a dataframe with no modifications to values}
+\title{Transforms a list of mcmcObjs into a list of dataframes with no modifications to values}
 \usage{
 standardTransform(mhDraws, ...)
 }
 \arguments{
-\item{mhDraws}{An object of class mcmcObj}
+\item{mhDraws}{An list of mcmcObjs}
 
 \item{...}{Not used.}
 }
 \value{
-data.frame with rows that represent MCMC draws. Columns named val.1, val.2,...
-contain different dimensions of the draws, column named Posterior contains (non-normalized)
-posterior value of the draw
+A list of data.frames with rows that represent MCMC draws.
+Columns named 'val.1', 'val.2',... contain different dimensions of the draws,
+column named 'Posterior' contains (non-normalized) posterior value of the draw and column
+named 't' gives the within-chain ordering of the draws. Each separate data.frame is a
+different chain.
 }
 \description{
-Transforms an mcmcObj into a dataframe with no modifications to values
+Transforms a list of mcmcObjs into a list of dataframes with no modifications to values
 }
