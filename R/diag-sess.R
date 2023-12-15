@@ -14,7 +14,7 @@ sess <- function(mhDraws, ...){
   })
 
   #Calculate effective sample size
-  chainESS <- sapply(mhMCMC, multiESS)
+  chainESS <- sapply(mhMCMC, mcmcse::multiESS)
 
   #Present as df and return
   chainESS <- as.data.frame(matrix(chainESS, nrow = 1))

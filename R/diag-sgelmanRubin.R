@@ -7,14 +7,14 @@ sgelmanRubin <- function(mhDraws, ...){
 
   #Strip out unecessary info from mhDraws
   mhMCMC <- lapply(mhDraws, function(df){
-    return(mcmc(df[grepl('val.1', names(df))]))
+    return(coda::mcmc(df[grepl('val.1', names(df))]))
   })
 
   #Make into mcmcm.list
-  mhMCMC <- as.mcmc.list(mhMCMC)
+  mhMCMC <- coda::as.mcmc.list(mhMCMC)
 
   #Get gelman object
-  gel <- gelman.diag(mhMCMC, autoburnin = FALSE)
+  gel <- coda::gelman.diag(mhMCMC, autoburnin = FALSE)
 
   #Return as presented dataframe
   df <- as.data.frame(gel$psrf)
