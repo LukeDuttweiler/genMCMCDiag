@@ -14,7 +14,7 @@
 #' Posterior\[i\] is x\[i, 'Posterior'\]. These are combined and returned as
 #' list(val = val, Posterior = Posterior).
 #'
-#' @return Object of class 'mcmcObj' and 'list'
+#' @return Object of class 'mcmcObj' and 'list'.
 #' @export
 #'
 as.mcmcObj <- function(x, ...){

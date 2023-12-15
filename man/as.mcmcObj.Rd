@@ -12,7 +12,7 @@ as.mcmcObj(x, ...)
 \item{...}{Extra arguments passed to methods. Currently unused.}
 }
 \value{
-Object of class 'mcmcObj' and 'list'
+Object of class 'mcmcObj' and 'list'.
 }
 \description{
 Turns a data.frame or list into an mcmcObj.
