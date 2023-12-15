@@ -1,6 +1,6 @@
 Package: genMCMCDiag
 Title: Generalized Convergence Diagnostics for Complicated MCMC Algorithms
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Luke", "Duttweiler", email = "lduttweiler@hsph.harvard.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0467-995X"))
@@ -12,9 +12,9 @@ RoxygenNote: 7.2.3
 URL: https://github.com/LukeDuttweiler/genMCMCDiag
 BugReports: https://github.com/LukeDuttweiler/genMCMCDiag/issues
 Depends: 
-    ggplot2,
+    ggplot2 (>= 3.0.0),
     R (>= 2.10)
 LazyData: true
 Imports: 
-    coda,
-    mcmcse
+    coda (>= 0.19.0),
+    mcmcse (> 1.0.0)
