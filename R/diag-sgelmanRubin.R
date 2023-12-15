@@ -1,3 +1,10 @@
+#' Calculate Gelman-Rubin statistic for multi-chain samples of a univariate (or transformed univariate) MCMC algorith from an mcmcObj
+#'
+#' @param mhDraws Object of mcmcObj class
+#' @param ... Catches unnecessary additional arguments
+#'
+#' @return Data.frame with 1 row and 2 columns. First entry gives estimated GR statistic, second gives upper 95% limit for GR statistic.
+#'
 sgelmanRubin <- function(mhDraws, ...){
 
   #Check for a val.2 column
