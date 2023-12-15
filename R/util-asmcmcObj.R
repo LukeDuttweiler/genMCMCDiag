@@ -2,22 +2,30 @@ as.mcmcObj <- function(x, ...){
   UseMethod('as.mcmcObj')
 }
 
-as.mcmcObj.data.frame <- function(x){
-  #Split into list of vectors and vector of posteriors
-  val <- lapply(1:nrow(x), function(i){
-    unlist(x[i,!(names(x) %in% 'Posterior')])
-  })
+setMethod("as.mcmcObj",
+          signature(x = "data.frame"),
+          function (x)
+          {
+            #Split into list of vectors and vector of posteriors
+            val <- lapply(1:nrow(x), function(i){
+              unlist(x[i,!(names(x) %in% 'Posterior')])
+            })
 
-  Posterior <- x$Posterior
+            Posterior <- x$Posterior
 
-  return(list(val = val, Posterior = Posterior))
-}
+            return(list(val = val, Posterior = Posterior))
+          }
+)
 
-as.mcmcObj.list <- function(x){
-  #Warn if names are wrong
-  if(any(!(names(x) %in% c('val', 'Posterior')))){
-    warning('names of lists in individual chains should be val or Posterior. Stuff might break.')
-  }
-  #Lists are all good, keep
-  return(x)
-}
+setMethod("as.mcmcObj",
+          signature(x = "list"),
+          function (x)
+          {
+            #Warn if names are wrong
+            if(any(!(names(x) %in% c('val', 'Posterior')))){
+              warning('names of lists in individual chains should be val or Posterior. Stuff might break.')
+            }
+            #Lists are all good, keep
+            return(x)
+          }
+)
