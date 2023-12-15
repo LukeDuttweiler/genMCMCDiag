@@ -13,7 +13,10 @@ setMethod("as.mcmcObj",
 
             Posterior <- x$Posterior
 
-            return(list(val = val, Posterior = Posterior))
+            ret <- list(val = val, Posterior = Posterior)
+            class(ret) <- c('mcmcObj', 'list')
+
+            return(ret)
           }
 )
 
@@ -26,6 +29,8 @@ setMethod("as.mcmcObj",
               warning('names of lists in individual chains should be val or Posterior. Stuff might break.')
             }
             #Lists are all good, keep
+            class(x) <- c('mcmcObj', 'list')
+
             return(x)
           }
 )
