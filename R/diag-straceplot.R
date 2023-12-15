@@ -1,3 +1,11 @@
+#' Generate a traceplot of MCMC draws from an mcmcObj
+#'
+#' @param mhDraws Object of class mcmcObj
+#' @param method Character string - Name of method used to generate traceplot. Is used to generate the title of the traceplot.
+#' @param ... Catches unused arguments
+#'
+#' @return ggplot2 plot object showing traceplot
+#'
 straceplot <- function(mhDraws, method = NULL, ...){
   #Check for a val.2 column
   if(!is.null(mhDraws[[1]]$val.2)){
