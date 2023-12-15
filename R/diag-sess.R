@@ -1,12 +1,10 @@
-#' Title
+#' Calculate the effective sample size, per chain and in total, of MCMC draws from an mcmcObj
 #'
-#' @param mhDraws
-#' @param ...
+#' @param mhDraws Object of mcmcObj class
+#' @param ... Catches unnecessary additional arguments
 #'
-#' @return
-#' @export
+#' @return Data.frame with 1 Row and (# Chains + 1) Columns. Each entry gives the estimated ESS for the chain or sum of chains.
 #'
-#' @examples
 sess <- function(mhDraws, ...){
   #Strip out unecessary info from mhDraws
   mhMCMC <- lapply(mhDraws, function(df){

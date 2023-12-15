@@ -2,13 +2,18 @@
 % Please edit documentation in R/diag-sess.R
 \name{sess}
 \alias{sess}
-\title{Title}
+\title{Calculate the effective sample size, per chain and in total, of MCMC draws from an mcmcObj}
 \usage{
 sess(mhDraws, ...)
 }
 \arguments{
-\item{...}{}
+\item{mhDraws}{Object of mcmcObj class}
+
+\item{...}{Catches unnecessary additional arguments}
+}
+\value{
+Data.frame with 1 Row and (# Chains + 1) Columns. Each entry gives the estimated ESS for the chain or sum of chains.
 }
 \description{
-Title
+Calculate the effective sample size, per chain and in total, of MCMC draws from an mcmcObj
 }
