@@ -1,18 +1,52 @@
+#' Transforms a list of mcmcObjs into a list of data.frames using the TS transformation
+#'
+#' @param mhDraws List of mcmcObjs
+#' @param distance Function defined on the space of MCMC draws. See details.
+#' @param maxRotations Integer. Unecessary to specify. Will be removed soon.
+#' @param minDist Numeric. Value which specifies the minimum possible distance for two draws
+#' which are not equal. See details.
+#' @param fuzzy Logical. If TRUE computes an approximate version of the TS algorithm.
+#'  See details.
+#' @param fuzzyDist Numeric. Parameter for approximate version of algorithm.
+#' @param verbose Logical. If TRUE, function prints out information about approximate
+#'  computation time
+#' @param ... Catches extra arguments. Not used.
+#'
+#' @details
+#' The TS transformation sets up a traveling salesman algorithm by calculating the
+#' pair-wise distances between each unique draw from the mhDraws and solving the resulting
+#' TS problem with the nearest neighbor (NN) algorithm.
+#'
+#' minDist can be used to speed up the algorithm if it is known that
+#' when x != y then distance(x, y) >= minDist. Otherwise this should be ignored.
+#'
+#' The fuzzy approximation of the algorithm works by splitting the unique draws into
+#' smaller sets each containing at most 1% of all unique draws,
+#' and fitting the NN algorithm within each set, and then on the resulting 'end points'
+#' of each set. The sets are created by randomly selecting a representative draw and then
+#' putting the 'closest' draws with distance less than fuzzyDist into that set,
+#' until the set contains 1% of all unique draws. The fuzzy approximation can GREATLY
+#' reduce computation time, as is evidenced if the user specifies verbose = TRUE.
+#'
+#' @return List of data.frames with columns 'val.1' which is the TS transformation of each
+#'  MCMC draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC
+#'   draw and 't' which gives the within-chain ordering of the MCMC draws.
+#' Each data.frame is a separate chain.
 tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
-                        fuzzy = FALSE, fuzzyDist = .2, verbose = TRUE){
-  
+                        fuzzy = FALSE, fuzzyDist = .2, verbose = TRUE, ...){
+
   #Put all draws in a single vector
   allDraws <- lapply(mhDraws, function(mhList){
     return(mhList[grepl('val', names(mhList))])
   })
-  
+
   #Twice, because we need to remove two list levels without combining everything
   allDraws <- do.call('c', allDraws)
   allDraws <- do.call('c', allDraws)
-  
+
   #Make labels for all draws. Draws that are identical have the same label
   allDrawLabels <- listLabels(allDraws)
-  
+
   #If multiple chains...
   if(length(mhDraws) > 1){
     #Set labels for each chain (NOTE: assuming all chains have same number of draws)
@@ -23,16 +57,16 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
     chainLabels <- list(allDrawLabels)
     names(chainLabels) <- '1'
   }
-  
+
   #Get unique draws
   uniqueDraws <- allDraws[!duplicated(allDraws)]
   uniqueDrawsSTABLE <- uniqueDraws #version of unique draws that is unchanged throughout
   uniqueLabels <- allDrawLabels[!duplicated(allDraws)]
-  
+
   #Estimate times
   timeEst <- estimateTsTime(distance = distance, draw1 = uniqueDraws[[1]],
                             draw2 = uniqueDraws[[2]], N = length(uniqueDraws))
-  
+
   #if selected is standard and fuzzy is significantly better, warn, otherwise just print
   #Only prints out if verbose
   if(!fuzzy & verbose){
@@ -49,7 +83,7 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
     message(paste0('Estimated time is approximately ',timeEst$Fuzzy,
                    ' minutes. May be faster.'))
   }
-  
+
   #Create representative bins if fuzzy is requested (speeds things up)
   if(fuzzy){
     #BACKWARD DIRECTION
@@ -63,52 +97,52 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
     for(j in 1:length(binValues)){
       #Measure distances
       currentDist <- rep(Inf, length(uniqueDraws))
-      
+
       for(i in unbinnedValues){
         currentDist[i] <- distance(binValues[[j]], uniqueDraws[[i]])
       }
-      
+
       valsToBin <- which(currentDist < fuzzyDist)
-      
+
       #If more than 1% of number of unique vals, limit to 1%
       top <- ceiling(.01*length(uniqueLabels))
       if(length(valsToBin) > top){
         topDist <- sort(currentDist)[top]
         valsToBin <- which((currentDist < fuzzyDist) & currentDist <= topDist)
       }
-      
+
       #Bin values with distance less than fuzzyDist
       binLabels[valsToBin] <- as.character(j)
-      
+
       #Remove binned values from unbinnedValues vector
       unbinnedValues <- setdiff(unbinnedValues, valsToBin)
-      
+
       #If any remain, put next in binValues
       if(length(unbinnedValues) > 0){
-        
+
         #Select next binValue Label
         if(length(unbinnedValues) == 1){
           nextBin <- unbinnedValues
         }else{
           nextBin <- sample(unbinnedValues,1)
         }
-        
+
         binLabels[nextBin] <- as.character(j+1)
         unbinnedValues <- setdiff(unbinnedValues, nextBin)
         binValues[[j+1]] <- uniqueDraws[[nextBin]]
       }else{break}
     }
-    
+
     #Fit nearest neighbor solution within each bin
     nnFits <- lapply(unique(binLabels), function(i){
       tempLabels <- uniqueLabels[binLabels == i]
       tempDraws <- uniqueDraws[binLabels == i]
-      
+
       ft <- fitNN(tempDraws, tempLabels, distance = distance, minDist = minDist)
-      
+
       return(ft)
     })
-    
+
     #Extract bin endpoints
     binEnds <- lapply(nnFits, function(f){
       ends <- f$tsValues[c(1,length(f$tsValues))]
@@ -116,8 +150,8 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
         return(ends[1])
       }else{return(ends)}
     })
-    
-    
+
+
     #Fit final solution using endpoints
     tsSolution <- nnFits[[1]]$tsSolution
     tsValues <- nnFits[[1]]$tsValues
@@ -133,16 +167,16 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
                                 distance(currentDraw, binEnds[[j]][[2]]))
         }
       }# End loop over j
-      
+
       #Make sure already used values aren't chosen
       currentDist[alreadyUsed,] <- Inf
-      
+
       #select closest value
       nextChoice <- which(currentDist == min(currentDist), arr.ind = TRUE)[1,1]
-      
+
       #Update alreadyUsed
       alreadyUsed <- c(alreadyUsed, nextChoice)
-      
+
       #Update tsSolution, tsValues, and currentDraw
       if(currentDist[nextChoice,1] <= currentDist[nextChoice,2]){
         tsSolution <- c(tsSolution, nnFits[[nextChoice]]$tsSolution)
@@ -163,14 +197,14 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
     for(i in 1:(length(uniqueLabels)-1)){
       #Assign label for next step in solution
       tsSolution[i] <- unusedLabels[j]
-      
+
       #Save current draw for measuring distance
       currentDraw <- uniqueDraws[[j]]
-      
+
       #Remove current as an option
       unusedLabels <- unusedLabels[-j]
       uniqueDraws <- uniqueDraws[-j]
-      
+
       #Test distances quitting if we ever hit the minimum distance
       currentDist <- rep(Inf, length(unusedLabels))
       for(t in 1:length(currentDist)){
@@ -180,70 +214,70 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
           break
         }
       }
-      
+
       #Set the new best move as j
       j <- which(currentDist == min(currentDist))[1]
     }
-    
+
     #Set final solution
     tsSolution[length(tsSolution)] <- unusedLabels[j]
     names(tsSolution) <- tsSolution
-    
+
     #Get real values for tsSolution
     tsValues <- uniqueDrawsSTABLE[as.numeric(tsSolution)]
   }#End if(fuzzy)else()
-  
-  #Get differences between consecutive values. Line up so that 
+
+  #Get differences between consecutive values. Line up so that
   #tsDiffs[i] = distance(tsValues[[i]], tsValues[[i+1]])
   #This wraps around as if it were a cycle (thats why the %% length thing exists)
   tsDiffs <- sapply(1:length(tsValues), function(i){
     return(distance(tsValues[[i]], tsValues[[((i) %% length(tsValues)) + 1]]))
   })
-  
+
   #Transform chain labels into yaxis values
   mhTSP <- lapply(chainLabels, function(lVec){
-    
+
     val <- sapply(lVec, function(l){
       which(l == names(tsSolution))
     })
-    
+
     return(val)
   })
-  
+
   #Find best cutpoint (rotate a number of times up to maxRotations)
   #First find total traceplot travel distance for the different rotations
   overallDists <- sapply(1:min(maxRotations, length(uniqueLabels)), function(r){
     #Rotate Yax by r-1 steps, calculate with true distances
     yAxr <- cumsum(c(0, tsDiffs[((1:length(tsDiffs) + (r-2)) %% length(tsDiffs)) + 1]))
-    
+
     #Rotate chain by r-1 steps
     mhTSPr <- lapply(mhTSP, function(chain){
       return(yAxr[((chain + (r-2)) %% length(uniqueLabels)) + 1])
     })
-    
+
     #calculate total distance the line is traveling
     chainDists <- sapply(mhTSPr, function(chain){
       return(sum(abs(diff(chain))))
     })
     totalDist <- sum(chainDists)
-    
+
     return(totalDist)
   })
-  
+
   #Get the optimal cutpoint
   optR <- which(overallDists == min(overallDists))[1]
-  
+
   #Create y-axis based on true distances
   trueYAx <- cumsum(c(0, tsDiffs[((1:length(tsDiffs) + (optR-2)) %% length(tsDiffs)) + 1]))
-  
+
   #Rotate chains to optimal cutpoint
   mhTSP <- lapply(mhTSP, function(chain){
-    
+
     chainR <- trueYAx[((chain + (optR-2)) %% length(uniqueLabels)) + 1]
-    
+
     return(data.frame('val.1' = chainR, 't' = 1:length(chainR)))
   })
-  
+
   #Return transformed chains
   return(mhTSP)
 }
