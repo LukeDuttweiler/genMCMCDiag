@@ -32,6 +32,8 @@
 #'  MCMC draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC
 #'   draw and 't' which gives the within-chain ordering of the MCMC draws.
 #' Each data.frame is a separate chain.
+#'
+#' @export
 tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
                         fuzzy = FALSE, fuzzyDist = .2, verbose = TRUE, ...){
 

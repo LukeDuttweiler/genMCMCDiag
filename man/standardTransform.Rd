@@ -17,6 +17,8 @@ Columns named 'val.1', 'val.2',... contain different dimensions of the draws,
 column named 'Posterior' contains (non-normalized) posterior value of the draw and column
 named 't' gives the within-chain ordering of the draws. Each separate data.frame is a
 different chain.
+
+@export
 }
 \description{
 Transforms a list of mcmcObjs into a list of dataframes with no modifications to values

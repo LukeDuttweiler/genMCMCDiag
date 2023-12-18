@@ -1,3 +1,34 @@
+#' Generate Diagnostics for Markov Chain Monte Carlo Draws
+#'
+#' This function generates diagnostics for Markov Chain Monte Carlo (MCMC) draws, transforming the draws if specified, and evaluating selected diagnostics.
+#'
+#' @param mhDraws A list of MCMC draws, where each element is a chain represented as an mcmcObj
+#' @param method Method for transforming the MCMC draws. Options include 'standard', 'ts', 'lanfear', or a custom transformation function. See details.
+#' @param diagnostics A character vector or list of diagnostic functions to be evaluated. Options include 'traceplot', 'ess', 'gelmanRubin', or custom functions. See details.
+#' @param distance Function for evaluating distance between MCMC draws if required by 'method'. Note that the lanfear and ts methods ALWAYS require a distance function.
+#' @param verbose If TRUE, informative messages are displayed.
+#' @param ... Additional arguments to be passed to the transformation method. See tsTransform for details on the 'ts' transformation, and lanfearTransform for details on the 'lanfear' method.
+#'
+#' @return An object of class 'mcmcDiag', containing evaluated diagnostics, transformed draws, and function call details.
+#'
+#' @details
+#' Built-in transformation methods can be called with the appropriate character string in the 'method'
+#' argument. For details on a particular method use ?'method'Transform. Custom transform
+#' functions may be added as well. A custom function must be written to accept an mcmcObj
+#' type object, and output an mcmcObj type object.
+#'
+#' Built-in diagnostics can be called with the appropriate character string in the 'diagnostics'
+#' argument. Additional custom diagnostic functions may be written. These functions should
+#' act on an mcmcObj type object, and may output in any format.
+#'
+#' For details on mcmcObj objects, see ?mcmcObj
+#'
+#'
+#' @export
+#'
+#' @examples
+#' tst <- genDiagnostic(uniMCMCResults)
+#' tst$diagnostics
 genDiagnostic <- function(mhDraws,
                           method = c('standard', 'ts', 'lanfear', 'likelihood'),
                           diagnostics = c('traceplot', 'ess', 'gelmanRubin'),
@@ -10,18 +41,18 @@ genDiagnostic <- function(mhDraws,
     argg$method <- argg$method[1]
   }
   methodArgs <- list(...)
-  
+
   #Make sure mhDraws is of the correct format
   if(!is.list(mhDraws)){
     stop('mhDraws must be a list with length equal to the number of chains')
   }
   mhDraws <- lapply(mhDraws, as.mcmcObj)
-  
+
   #Make sure diagnostics is not empty
   if(length(diagnostics) == 0){
     stop('diagnostics must contain at least one character or function.')
   }
-  
+
   #Make sure every entry in diagnostics is in the correct format, create names
   diagNames <- sapply(diagnostics, function(d){
     if(!is.function(d)){
@@ -34,7 +65,7 @@ genDiagnostic <- function(mhDraws,
       return('custom')
     }
   })
-  
+
   #Warnings regarding distance
   if(is.function(method) & !is.null(distance)){
     if(verbose){
@@ -53,25 +84,25 @@ genDiagnostic <- function(mhDraws,
       stop('distance must be specified for this method.')
     }
   }
-  
-  
+
+
   #Select Method
   if(is.character(method)){ #If method is character, must be one of the options
     #Make sure method is used correctly
     if(!(method[1] %in% c('standard', 'ts', 'lanfear', 'likelihood'))){
       stop("method must be a function or one of 'standard', 'ts', 'lanfear', 'likelihood'.")
     }
-    
+
     methodF <- get(paste0(method[1], 'Transform'))
   }else if(is.function(method)){#If method is function change call name
     methodF <- method
   }else{
     stop("method must be a function or one of 'standard', 'ts', 'lanfear', 'likelihood'.")
   }
-  
+
   #Get transformed data
   mhTransformed <- methodF(mhDraws = mhDraws, distance = distance, verbose = verbose, ...)
-  
+
   #Select and evaluate diagnostics
   diagRet <- lapply(diagnostics, function(d){
     if(is.character(d)){#If diagnostic is character, fetch correct diagnostic
@@ -81,18 +112,18 @@ genDiagnostic <- function(mhDraws,
     }else{
       stop("each diagnostic must be a function or one of 'traceplot','ess','gelmanRubin'.")
     }
-    
+
     #Return evaluated diagnostic
     return(diagF(mhTransformed, method = method))
   })
   names(diagRet) <- diagNames
-  
+
   #Create return object
   retObj <- list(diagnostics = diagRet,
                  transformedDraws = mhTransformed,
                  call = list(arguments = argg,
                              methodArguments = methodArgs))
   class(retObj) <- c('mcmcDiag', 'list')
-  
+
   return(retObj)
 }

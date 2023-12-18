@@ -16,6 +16,8 @@ likelihoodTransform(mhDraws, ...)
 List of data.frames with columns 'val.1' which is non-normalized
 posterior of each draw and 't' which gives the within-chain ordering of the MCMC draws.
 Each data.frame is a separate chain.
+
+@export
 }
 \description{
 Transforms a list of mcmcObjs into a list of data.frames using the 'likelihood'

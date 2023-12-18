@@ -8,6 +8,8 @@
 #'  column named 'Posterior' contains (non-normalized) posterior value of the draw and column
 #'  named 't' gives the within-chain ordering of the draws. Each separate data.frame is a
 #'  different chain.
+#'
+#'  @export
 standardTransform <- function(mhDraws, ...){
 
   #Will try to force into dataframe of the expected type

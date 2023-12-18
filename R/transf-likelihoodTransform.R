@@ -7,6 +7,8 @@
 #' @return List of data.frames with columns 'val.1' which is non-normalized
 #' posterior of each draw and 't' which gives the within-chain ordering of the MCMC draws.
 #'  Each data.frame is a separate chain.
+#'
+#'  @export
 likelihoodTransform <- function(mhDraws, ...){
   #Throw error if no Posterior value
   if(is.null(mhDraws[[1]]$Posterior)){

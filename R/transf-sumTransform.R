@@ -6,6 +6,8 @@
 #' @return List of data.frames with columns 'val.1' which is the sum of all dimensions of each MCMC
 #' draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC draw and 't'
 #' which gives the within-chain ordering of the MCMC draws. Each data.frame is a separate chain.
+#'
+#' @export
 sumTransform <- function(mhDraws, ...){
   #Turn each val value into sum of the parts
   mhSums <- lapply(mhDraws, function(mhList){
