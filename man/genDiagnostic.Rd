@@ -35,16 +35,28 @@ This function generates diagnostics for Markov Chain Monte Carlo (MCMC) draws, t
 \details{
 Built-in transformation methods can be called with the appropriate character string in the 'method'
 argument. For details on a particular method use ?'method'Transform. Custom transform
-functions may be added as well. A custom function must be written to accept an mcmcObj
-type object, and output an mcmcObj type object.
+functions may be added as well. A custom function must be written to accept a list of mcmcObj
+type objects, and output a list of mcmcObj type objects (each element in the list is
+a chain).
 
 Built-in diagnostics can be called with the appropriate character string in the 'diagnostics'
 argument. Additional custom diagnostic functions may be written. These functions should
-act on an mcmcObj type object, and may output in any format.
+act on a list of mcmcObj type objects, and may output in any format.
 
 For details on mcmcObj objects, see ?mcmcObj
 }
 \examples{
-tst <- genDiagnostic(uniMCMCResults)
-tst$diagnostics
+#Example using standard Traceplot
+tstS <- genDiagnostic(uniMCMCResults)
+tstS$diagnostics
+
+#Example using 'lanfear' traceplot
+tstL <- genDiagnostic(uniMCMCResults, method = 'lanfear', distance = eucDist,
+                      reference = 0)
+tstL$diagnostics
+
+#Example using 'ts' traceplot
+tstTS <- genDiagnostic(uniMCMCResults, method = 'ts', distance = eucDist,
+                       fuzzy = TRUE, fuzzyDist = .5)
+tstTS$diagnostics
 }
