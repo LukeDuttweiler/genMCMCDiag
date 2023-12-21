@@ -40,6 +40,13 @@
 #' #tstTS <- genDiagnostic(uniMCMCResults, method = 'ts', distance = eucDist,
 #' #                        fuzzy = TRUE, fuzzyDist = .5)
 #' #tstTS$diagnostics
+#'
+#' #Examples using bayesian network sample data
+#' tstBN1 <- genDiagnostic(bnMCMCResults, method = 'lanfear', distance = partitionDist)
+#' tstBN1$diagnostics
+#'
+#' tstBN2 <- genDiagnostic(bnMCMCResults, method = 'ts', distance = partitionDist)
+#' tstBN2$diagnostics
 genDiagnostic <- function(mhDraws,
                           method = c('standard', 'ts', 'lanfear', 'likelihood'),
                           diagnostics = c('traceplot', 'ess', 'gelmanRubin'),

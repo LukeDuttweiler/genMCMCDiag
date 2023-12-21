@@ -13,3 +13,18 @@
 #' }
 #' @source Luke Duttweiler
 "uniMCMCResults"
+
+#' Results from a Bayesian Network MCMC algorithm on simulated data
+#'
+#' Results from a Bayesian Network Metropolis-Hastings algorithm run on simulated data.
+#' Included for examples
+#'
+#' @format ## `bnMCMCResults`
+#' A list with 5 elements, each representing a different MCMC chain. Each element is
+#' a list with two elements
+#' \describe{
+#'   \item{val}{MCMC draw at current iteration}
+#'   \item{Posterior}{Posterior value of val}
+#' }
+#' @source Luke Duttweiler
+"bnMCMCResults"
