@@ -2,9 +2,15 @@
 % Please edit documentation in R/util-asmcmcObj.R
 \name{as.mcmcObj}
 \alias{as.mcmcObj}
+\alias{as.mcmcObj,data.frame-method}
+\alias{as.mcmcObj,list-method}
 \title{Turns a data.frame or list into an mcmcObj.}
 \usage{
 as.mcmcObj(x, ...)
+
+\S4method{as.mcmcObj}{data.frame}(x)
+
+\S4method{as.mcmcObj}{list}(x)
 }
 \arguments{
 \item{x}{data.frame or list. Should have a specific format. See details.}
@@ -27,4 +33,14 @@ If x is a data.frame as.mcmcObj will create a list of vectors val, where val[[i]
 columns of x[i,] EXCEPT a column named 'Posterior', and a vector of posterior values where
 Posterior[i] is x[i, 'Posterior']. These are combined and returned as
 list(val = val, Posterior = Posterior).
+}
+\examples{
+# Example with a data.frame
+df <- data.frame(matrix(rnorm(20), ncol = 5), Posterior = rnorm(4))
+as.mcmcObj(df)
+
+# Example with a list
+my_list <- list(val = list(c(1, 2), c(3, 4)), Posterior = c(0.1, 0.2))
+as.mcmcObj(my_list)
+
 }

@@ -35,7 +35,7 @@ straceplot <- function(mhDraws, method = NULL, ...){
   }
 
   #make plot
-  plt <- ggplot(data = pltDF) + geom_line(aes(x = t, y = val.1, col = Chain))
-  plt <- plt + theme_bw() + ggtitle(title) + theme(legend.position = 'none')
+  plt <- ggplot2::ggplot(data = pltDF) + ggplot2::geom_line(ggplot2::aes(x = t, y = val.1, col = Chain))
+  plt <- plt + ggplot2::theme_bw() + ggplot2::ggtitle(title) + ggplot2::theme(legend.position = 'none')
   return(plt)
 }

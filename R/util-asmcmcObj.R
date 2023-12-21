@@ -17,11 +17,23 @@
 #' @return Object of class 'mcmcObj' and 'list'.
 #' @export
 #'
+#' @examples
+#' # Example with a data.frame
+#' df <- data.frame(matrix(rnorm(20), ncol = 5), Posterior = rnorm(4))
+#' as.mcmcObj(df)
+#'
+#' # Example with a list
+#' my_list <- list(val = list(c(1, 2), c(3, 4)), Posterior = c(0.1, 0.2))
+#' as.mcmcObj(my_list)
+#'
 as.mcmcObj <- function(x, ...){
   UseMethod('as.mcmcObj')
 }
 
-setMethod("as.mcmcObj",
+#' @rdname as.mcmcObj
+#' @export
+#' @method as.mcmcObj data.frame
+methods::setMethod("as.mcmcObj",
           signature(x = "data.frame"),
           function (x)
           {
@@ -39,7 +51,10 @@ setMethod("as.mcmcObj",
           }
 )
 
-setMethod("as.mcmcObj",
+#' @rdname as.mcmcObj
+#' @export
+#' @method as.mcmcObj list
+methods::setMethod("as.mcmcObj",
           signature(x = "list"),
           function (x)
           {
