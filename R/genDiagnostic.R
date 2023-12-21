@@ -36,10 +36,10 @@
 #'                       reference = 0)
 #' tstL$diagnostics
 #'
-#' #Example using 'ts' traceplot
-#' tstTS <- genDiagnostic(uniMCMCResults, method = 'ts', distance = eucDist,
-#'                        fuzzy = TRUE, fuzzyDist = .5)
-#' tstTS$diagnostics
+#' #Example using 'ts' traceplot (not run here for sake of time during package build)
+#' #tstTS <- genDiagnostic(uniMCMCResults, method = 'ts', distance = eucDist,
+#' #                        fuzzy = TRUE, fuzzyDist = .5)
+#' #tstTS$diagnostics
 genDiagnostic <- function(mhDraws,
                           method = c('standard', 'ts', 'lanfear', 'likelihood'),
                           diagnostics = c('traceplot', 'ess', 'gelmanRubin'),
