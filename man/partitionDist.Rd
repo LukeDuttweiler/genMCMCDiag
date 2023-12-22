@@ -15,7 +15,8 @@ partitionDist(x, y)
 Numeric, Partition distance between x and y.
 }
 \description{
-Function to return the 'Partition' distance between two objects.
+Function to return the 'Partition' distance between two objects. Used for Bayesian
+Networks with the 'partition-MCMC' algorithm.
 }
 \note{
 For speed, no error handling if x and y do not have the same dimensions. Also,
