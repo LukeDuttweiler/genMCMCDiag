@@ -48,22 +48,22 @@ For details on mcmcObj objects, see ?mcmcObj
 \examples{
 #Example using standard Traceplot
 tstS <- genDiagnostic(uniMCMCResults)
-tstS$diagnostics
+tstS
 
 #Example using 'lanfear' traceplot
 tstL <- genDiagnostic(uniMCMCResults, method = 'lanfear', distance = eucDist,
                       reference = 0)
-tstL$diagnostics
+tstL
 
 #Example using 'ts' traceplot (not run here for sake of time during package build)
 #tstTS <- genDiagnostic(uniMCMCResults, method = 'ts', distance = eucDist,
 #                        fuzzy = TRUE, fuzzyDist = .5)
-#tstTS$diagnostics
+#tstTS
 
 #Examples using bayesian network sample data
 tstBN1 <- genDiagnostic(bnMCMCResults, method = 'lanfear', distance = partitionDist)
-tstBN1$diagnostics
+tstBN1
 
 tstBN2 <- genDiagnostic(bnMCMCResults, method = 'ts', distance = partitionDist)
-tstBN2$diagnostics
+tstBN2
 }

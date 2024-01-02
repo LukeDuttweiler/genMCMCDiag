@@ -1,7 +1,29 @@
+#' mcmcDiag Class Definition
+#'
+#' A class for storing and handling MCMC diagnostics.
+#'
+#' @slot diagnostics A list containing MCMC diagnostic information.
+#' @slot transformedDraws A list containing transformed MCMC draws.
+#' @slot call A list containing information about the function call.
+#'
+#' @docType class
+#' @name mcmcDiag-class
+#' @rdname mcmcDiag-class
+#' @exportClass mcmcDiag
 mcmcDiag <- setClass("mcmcDiag", slots = c(diagnostics="list", transformedDraws="list",
                                            call = 'list'))
 
 
+#' Print Method for mcmcDiag Objects
+#'
+#' Prints MCMC diagnostics and relevant information.
+#'
+#' @param x An object of class \code{mcmcDiag}.
+#'
+#' @return Prints MCMC diagnostics to the console.
+#'
+#' @exportMethod print
+#' @aliases print.mcmcDiag
 methods::setMethod('print',
                    signature(x = 'mcmcDiag'),
                    function(x){
@@ -27,7 +49,8 @@ methods::setMethod('print',
                          nm <- row.names(diags[[d]])[1]
                          row.names(diags[[d]]) <- NULL
                          strAdd <- paste0('|',nm, ': \n|---------------------------\n',
-                                          paste0(knitr::kable(diags[[d]]), collapse = '\n'),
+                                          paste0(knitr::kable(round(diags[[d]], 3)),
+                                                 collapse = '\n'),
                                           '\n\n')
                          catStr <- paste0(catStr, strAdd)
                        }
@@ -35,7 +58,23 @@ methods::setMethod('print',
                      }
                    })
 
+#' Show - Inherited from package 'methods'
+#' @importFrom methods show
+#' @inheritParams methods::show
+#' @inherit methods::show
+#' @export
+show <- methods::show
 
+#' Show Method for mcmcDiag Objects
+#'
+#' Displays the content of an object of class \code{mcmcDiag}.
+#'
+#' @param object An object of class \code{mcmcDiag}.
+#'
+#' @return Displays the content of the object.
+#'
+#' @exportMethod show
+#' @aliases show.mcmcDiag
 methods::setMethod('show',
                    signature = 'mcmcDiag',
                    definition = function(object){
