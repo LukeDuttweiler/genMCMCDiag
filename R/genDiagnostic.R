@@ -136,12 +136,9 @@ genDiagnostic <- function(mhDraws,
   })
   names(diagRet) <- diagNames
 
-  #Create return object
-  retObj <- list(diagnostics = diagRet,
-                 transformedDraws = mhTransformed,
-                 call = list(arguments = argg,
-                             methodArguments = methodArgs))
-  class(retObj) <- c('mcmcDiag', 'list')
+  retObj <- new('mcmcDiag', diagnostics = diagRet, transformedDraws = mhTransformed,
+                call = list(arguments = argg,
+                            methodArguments = methodArgs))
 
   return(retObj)
 }
