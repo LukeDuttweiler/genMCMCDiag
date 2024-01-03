@@ -17,6 +17,6 @@ LazyData: true
 Imports:
     ggplot2 (>= 3.0.0),
     coda (>= 0.19.0),
-    mcmcse (> 1.0.0),
-    methods,
+    mcmcse (>= 1.0.0),
+    methods (>= 4.0.0),
     knitr
