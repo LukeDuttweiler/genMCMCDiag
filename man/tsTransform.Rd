@@ -23,12 +23,12 @@ tsTransform(
 \item{maxRotations}{Integer. Unecessary to specify. Will be removed soon.}
 
 \item{minDist}{Numeric. Value which specifies the minimum possible distance for two draws
-which are not equal. See details.}
+which are not equal. See tsTransform details.}
 
 \item{fuzzy}{Logical. If TRUE computes an approximate version of the TS algorithm.
-See details.}
+See tsTransform details.}
 
-\item{fuzzyDist}{Numeric. Parameter for approximate version of algorithm.}
+\item{fuzzyDist}{Numeric. Parameter for approximate version of ts algorithm.}
 
 \item{verbose}{Logical. If TRUE, function prints out information about approximate
 computation time}

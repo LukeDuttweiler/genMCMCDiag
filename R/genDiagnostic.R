@@ -7,7 +7,8 @@
 #' @param diagnostics A character vector or list of diagnostic functions to be evaluated. Options include 'traceplot', 'ess', 'gelmanRubin', or custom functions. See details.
 #' @param distance Function for evaluating distance between MCMC draws if required by 'method'. Note that the lanfear and ts methods ALWAYS require a distance function.
 #' @param verbose If TRUE, informative messages are displayed.
-#' @param ... Additional arguments to be passed to the transformation method. See tsTransform for details on the 'ts' transformation, and lanfearTransform for details on the 'lanfear' method.
+#' @inheritDotParams tsTransform minDist fuzzy fuzzyDist
+#' @inheritDotParams lanfearTransform reference
 #'
 #' @return An object of class 'mcmcDiag', containing evaluated diagnostics, transformed draws, and function call details.
 #'
@@ -15,12 +16,14 @@
 #' Built-in transformation methods can be called with the appropriate character string in the 'method'
 #' argument. For details on a particular method use ?'method'Transform. Custom transform
 #' functions may be added as well. A custom function must be written to accept a list of mcmcChain
-#' type objects, and output a list of mcmcChain type objects (each element in the list is
-#' a chain).
+#' type objects, and output a list of dataframes with columns val.1 (the transformed draw)
+#' and (optionally) Posterior. Each element in the list is the transformed MCMC
+#' chain corresponding to the input.
 #'
 #' Built-in diagnostics can be called with the appropriate character string in the 'diagnostics'
 #' argument. Additional custom diagnostic functions may be written. These functions should
-#' act on a list of mcmcChain type objects, and may output in any format.
+#' act on a list of data.frames output from a transform function and should output as a relatively
+#' small data.frame where the name of diagnostic is the first row.name.
 #'
 #' For details on mcmcChain objects, see ?mcmcChain
 #'

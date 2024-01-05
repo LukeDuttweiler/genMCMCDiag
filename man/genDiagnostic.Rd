@@ -24,7 +24,18 @@ genDiagnostic(
 
 \item{verbose}{If TRUE, informative messages are displayed.}
 
-\item{...}{Additional arguments to be passed to the transformation method. See tsTransform for details on the 'ts' transformation, and lanfearTransform for details on the 'lanfear' method.}
+\item{...}{
+  Arguments passed on to \code{\link[=tsTransform]{tsTransform}}, \code{\link[=lanfearTransform]{lanfearTransform}}
+  \describe{
+    \item{\code{minDist}}{Numeric. Value which specifies the minimum possible distance for two draws
+which are not equal. See tsTransform details.}
+    \item{\code{fuzzy}}{Logical. If TRUE computes an approximate version of the TS algorithm.
+See tsTransform details.}
+    \item{\code{fuzzyDist}}{Numeric. Parameter for approximate version of ts algorithm.}
+    \item{\code{reference}}{Reference point for lanfearTransform (with exact same structure as each MCMC draw)
+for draw comparison. If left NULL a random point is selected from the given draws.
+See lanfearTransform details.}
+  }}
 }
 \value{
 An object of class 'mcmcDiag', containing evaluated diagnostics, transformed draws, and function call details.
@@ -36,12 +47,14 @@ This function generates diagnostics for Markov Chain Monte Carlo (MCMC) draws, t
 Built-in transformation methods can be called with the appropriate character string in the 'method'
 argument. For details on a particular method use ?'method'Transform. Custom transform
 functions may be added as well. A custom function must be written to accept a list of mcmcChain
-type objects, and output a list of mcmcChain type objects (each element in the list is
-a chain).
+type objects, and output a list of dataframes with columns val.1 (the transformed draw)
+and (optionally) Posterior. Each element in the list is the transformed MCMC
+chain corresponding to the input.
 
 Built-in diagnostics can be called with the appropriate character string in the 'diagnostics'
 argument. Additional custom diagnostic functions may be written. These functions should
-act on a list of mcmcChain type objects, and may output in any format.
+act on a list of data.frames output from a transform function and should output as a relatively
+small data.frame where the name of diagnostic is the first row.name.
 
 For details on mcmcChain objects, see ?mcmcChain
 }

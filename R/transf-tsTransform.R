@@ -4,10 +4,10 @@
 #' @param distance Function defined on the space of MCMC draws. See details.
 #' @param maxRotations Integer. Unecessary to specify. Will be removed soon.
 #' @param minDist Numeric. Value which specifies the minimum possible distance for two draws
-#' which are not equal. See details.
+#' which are not equal. See tsTransform details.
 #' @param fuzzy Logical. If TRUE computes an approximate version of the TS algorithm.
-#'  See details.
-#' @param fuzzyDist Numeric. Parameter for approximate version of algorithm.
+#'  See tsTransform details.
+#' @param fuzzyDist Numeric. Parameter for approximate version of ts algorithm.
 #' @param verbose Logical. If TRUE, function prints out information about approximate
 #'  computation time
 #' @param ... Catches extra arguments. Not used.

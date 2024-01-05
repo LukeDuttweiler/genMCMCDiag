@@ -2,9 +2,9 @@
 #'
 #' @param mhDraws A list of mcmcChains
 #' @param distance Distance function defined on the space of MCMC draws. See details.
-#' @param reference Reference point (with exact same structure as each MCMC draw)
+#' @param reference Reference point for lanfearTransform (with exact same structure as each MCMC draw)
 #'  for draw comparison. If left NULL a random point is selected from the given draws.
-#'  See details.
+#'  See lanfearTransform details.
 #' @param ... Catches extra arguments. Not used.
 #'
 #' @details

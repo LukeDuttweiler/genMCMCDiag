@@ -11,9 +11,9 @@ lanfearTransform(mhDraws, distance, reference = NULL, ...)
 
 \item{distance}{Distance function defined on the space of MCMC draws. See details.}
 
-\item{reference}{Reference point (with exact same structure as each MCMC draw)
+\item{reference}{Reference point for lanfearTransform (with exact same structure as each MCMC draw)
 for draw comparison. If left NULL a random point is selected from the given draws.
-See details.}
+See lanfearTransform details.}
 
 \item{...}{Catches extra arguments. Not used.}
 }
