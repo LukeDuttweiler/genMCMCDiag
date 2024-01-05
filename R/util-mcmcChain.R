@@ -3,14 +3,14 @@
 #' A class for storing MCMC results from a single chain.
 #'
 #' @slot val A list containing the MCMC draws from a single chain IN ORDER.
-#' @slot Posterior A numeric vector containing the Posterior values corresponding to
+#' @slot Posterior A vector containing the Posterior values corresponding to
 #' the draws in val
 #'
 #' @docType class
 #' @name mcmcChain-class
 #' @rdname mcmcChain-class
 #' @exportClass mcmcChain
-mcmcChain <- setClass("mcmcChain", slots = c(val = 'list', Posterior = 'numeric'))
+mcmcChain <- setClass("mcmcChain", slots = c(val = 'list', Posterior = 'vector'))
 
 
 #' Turns a data.frame or list into an mcmcChain.

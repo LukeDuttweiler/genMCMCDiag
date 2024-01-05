@@ -13,7 +13,7 @@ A class for storing MCMC results from a single chain.
 \describe{
 \item{\code{val}}{A list containing the MCMC draws from a single chain IN ORDER.}
 
-\item{\code{Posterior}}{A numeric vector containing the Posterior values corresponding to
+\item{\code{Posterior}}{A vector containing the Posterior values corresponding to
 the draws in val}
 }}
 
