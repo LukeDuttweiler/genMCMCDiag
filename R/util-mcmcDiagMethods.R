@@ -30,6 +30,11 @@ methods::setMethod('print',
                      #Extract method
                      m <- x@call$arguments$method
 
+                     #Change to 'Custom' if custom function was used
+                     if(!is.character(m)){
+                       m <- 'Custom'
+                     }
+
                      #Extract diagnostics
                      diags <- x@diagnostics
 
