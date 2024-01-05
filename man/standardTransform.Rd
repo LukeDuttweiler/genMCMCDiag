@@ -2,12 +2,12 @@
 % Please edit documentation in R/transf-standardTransform.R
 \name{standardTransform}
 \alias{standardTransform}
-\title{Transforms a list of mcmcObjs into a list of dataframes with no modifications to values}
+\title{Transforms a list of mcmcChains into a list of dataframes with no modifications to values}
 \usage{
 standardTransform(mhDraws, ...)
 }
 \arguments{
-\item{mhDraws}{An list of mcmcObjs}
+\item{mhDraws}{An list of mcmcChains}
 
 \item{...}{Not used.}
 }
@@ -21,5 +21,5 @@ different chain.
 @export
 }
 \description{
-Transforms a list of mcmcObjs into a list of dataframes with no modifications to values
+Transforms a list of mcmcChains into a list of dataframes with no modifications to values
 }

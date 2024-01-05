@@ -2,13 +2,13 @@
 % Please edit documentation in R/transf-likelihoodTransform.R
 \name{likelihoodTransform}
 \alias{likelihoodTransform}
-\title{Transforms a list of mcmcObjs into a list of data.frames using the 'likelihood'
+\title{Transforms a list of mcmcChains into a list of data.frames using the 'likelihood'
 transformation}
 \usage{
 likelihoodTransform(mhDraws, ...)
 }
 \arguments{
-\item{mhDraws}{A list of mcmcObjs}
+\item{mhDraws}{A list of mcmcChains}
 
 \item{...}{Catches extra arguments. Not used.}
 }
@@ -20,6 +20,6 @@ Each data.frame is a separate chain.
 @export
 }
 \description{
-Transforms a list of mcmcObjs into a list of data.frames using the 'likelihood'
+Transforms a list of mcmcChains into a list of data.frames using the 'likelihood'
 transformation
 }

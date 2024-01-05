@@ -2,12 +2,12 @@
 % Please edit documentation in R/transf-sumTransform.R
 \name{sumTransform}
 \alias{sumTransform}
-\title{Transforms a list of mcmcObjs into a list of data.frames using the 'sum' transformation}
+\title{Transforms a list of mcmcChains into a list of data.frames using the 'sum' transformation}
 \usage{
 sumTransform(mhDraws, ...)
 }
 \arguments{
-\item{mhDraws}{A list of mcmcObjs}
+\item{mhDraws}{A list of mcmcChains}
 
 \item{...}{Catches extra arguments. Not used.}
 }
@@ -17,5 +17,5 @@ draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC dra
 which gives the within-chain ordering of the MCMC draws. Each data.frame is a separate chain.
 }
 \description{
-Transforms a list of mcmcObjs into a list of data.frames using the 'sum' transformation
+Transforms a list of mcmcChains into a list of data.frames using the 'sum' transformation
 }

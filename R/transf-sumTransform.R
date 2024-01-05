@@ -1,6 +1,6 @@
-#' Transforms a list of mcmcObjs into a list of data.frames using the 'sum' transformation
+#' Transforms a list of mcmcChains into a list of data.frames using the 'sum' transformation
 #'
-#' @param mhDraws A list of mcmcObjs
+#' @param mhDraws A list of mcmcChains
 #' @param ... Catches extra arguments. Not used.
 #'
 #' @return List of data.frames with columns 'val.1' which is the sum of all dimensions of each MCMC
@@ -10,11 +10,11 @@
 #' @export
 sumTransform <- function(mhDraws, ...){
   #Turn each val value into sum of the parts
-  mhSums <- lapply(mhDraws, function(mhList){
+  mhSums <- lapply(mhDraws, function(mhChain){
 
     #Loop through val (as if it is a list, even if its only a vector) and calculate the distance between
     #the value and the reference for each
-    sums <- sapply(mhList$val, function(v){
+    sums <- sapply(mhChain@val, function(v){
       return(sum(v))
     })
 

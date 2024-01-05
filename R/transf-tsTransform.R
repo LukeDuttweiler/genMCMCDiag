@@ -1,6 +1,6 @@
-#' Transforms a list of mcmcObjs into a list of data.frames using the TS transformation
+#' Transforms a list of mcmcChains into a list of data.frames using the TS transformation
 #'
-#' @param mhDraws List of mcmcObjs
+#' @param mhDraws List of mcmcChains
 #' @param distance Function defined on the space of MCMC draws. See details.
 #' @param maxRotations Integer. Unecessary to specify. Will be removed soon.
 #' @param minDist Numeric. Value which specifies the minimum possible distance for two draws
@@ -38,12 +38,11 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
                         fuzzy = FALSE, fuzzyDist = .2, verbose = TRUE, ...){
 
   #Put all draws in a single vector
-  allDraws <- lapply(mhDraws, function(mhList){
-    return(mhList[grepl('val', names(mhList))])
+  allDraws <- lapply(mhDraws, function(mhChain){
+    return(mhChain@val)
   })
 
-  #Twice, because we need to remove two list levels without combining everything
-  allDraws <- do.call('c', allDraws)
+  #Combine one level
   allDraws <- do.call('c', allDraws)
 
   #Make labels for all draws. Draws that are identical have the same label

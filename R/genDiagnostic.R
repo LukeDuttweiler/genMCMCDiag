@@ -2,7 +2,7 @@
 #'
 #' This function generates diagnostics for Markov Chain Monte Carlo (MCMC) draws, transforming the draws if specified, and evaluating selected diagnostics.
 #'
-#' @param mhDraws A list of MCMC draws, where each element is a chain represented as an mcmcObj
+#' @param mhDraws A list of MCMC draws, where each element is a chain represented as an mcmcChain
 #' @param method Method for transforming the MCMC draws. Options include 'standard', 'ts', 'lanfear', or a custom transformation function. See details.
 #' @param diagnostics A character vector or list of diagnostic functions to be evaluated. Options include 'traceplot', 'ess', 'gelmanRubin', or custom functions. See details.
 #' @param distance Function for evaluating distance between MCMC draws if required by 'method'. Note that the lanfear and ts methods ALWAYS require a distance function.
@@ -14,15 +14,15 @@
 #' @details
 #' Built-in transformation methods can be called with the appropriate character string in the 'method'
 #' argument. For details on a particular method use ?'method'Transform. Custom transform
-#' functions may be added as well. A custom function must be written to accept a list of mcmcObj
-#' type objects, and output a list of mcmcObj type objects (each element in the list is
+#' functions may be added as well. A custom function must be written to accept a list of mcmcChain
+#' type objects, and output a list of mcmcChain type objects (each element in the list is
 #' a chain).
 #'
 #' Built-in diagnostics can be called with the appropriate character string in the 'diagnostics'
 #' argument. Additional custom diagnostic functions may be written. These functions should
-#' act on a list of mcmcObj type objects, and may output in any format.
+#' act on a list of mcmcChain type objects, and may output in any format.
 #'
-#' For details on mcmcObj objects, see ?mcmcObj
+#' For details on mcmcChain objects, see ?mcmcChain
 #'
 #' @export
 #'
@@ -64,7 +64,7 @@ genDiagnostic <- function(mhDraws,
   if(!is.list(mhDraws)){
     stop('mhDraws must be a list with length equal to the number of chains')
   }
-  mhDraws <- lapply(mhDraws, as.mcmcObj)
+  mhDraws <- lapply(mhDraws, as.mcmcChain)
 
   #Make sure diagnostics is not empty
   if(length(diagnostics) == 0){

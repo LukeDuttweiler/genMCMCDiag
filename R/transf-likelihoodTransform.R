@@ -1,7 +1,7 @@
-#' Transforms a list of mcmcObjs into a list of data.frames using the 'likelihood'
+#' Transforms a list of mcmcChains into a list of data.frames using the 'likelihood'
 #' transformation
 #'
-#' @param mhDraws A list of mcmcObjs
+#' @param mhDraws A list of mcmcChains
 #' @param ... Catches extra arguments. Not used.
 #'
 #' @return List of data.frames with columns 'val.1' which is non-normalized
@@ -11,13 +11,13 @@
 #'  @export
 likelihoodTransform <- function(mhDraws, ...){
   #Throw error if no Posterior value
-  if(is.null(mhDraws[[1]]$Posterior)){
+  if(is.null(mhDraws[[1]]@Posterior)){
     stop('The likelihood method requires posterior values for each chain.')
   }
 
   #Extract Posteriors
-  likelihood <- lapply(mhDraws, function(df){
-    return(data.frame(val.1 = df$Posterior, t = 1:length(df$Posterior)))
+  likelihood <- lapply(mhDraws, function(mhChain){
+    return(data.frame(val.1 = mhChain@Posterior, t = 1:length(mhChain@Posterior)))
   })
 
   #Notice we name likelihood as val in the dataframe.

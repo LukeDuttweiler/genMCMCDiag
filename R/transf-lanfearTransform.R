@@ -1,6 +1,6 @@
-#' Transforms a list of mcmcObjs into a list of data.frames using the Lanfear transformation
+#' Transforms a list of mcmcChains into a list of data.frames using the Lanfear transformation
 #'
-#' @param mhDraws A list of mcmcObjs
+#' @param mhDraws A list of mcmcChains
 #' @param distance Distance function defined on the space of MCMC draws. See details.
 #' @param reference Reference point (with exact same structure as each MCMC draw)
 #'  for draw comparison. If left NULL a random point is selected from the given draws.
@@ -25,21 +25,21 @@ lanfearTransform <- function(mhDraws, distance, reference = NULL, ...){
 
     #Select a random value from that chain
     mhChain <- mhDraws[[rChain]]
-    mhChainVal <- mhChain[grepl('val', names(mhChain))]
+    mhChainVal <- mhChain@val
 
-    rNum <- sample(1:length(mhChainVal[[1]]), 1)
-    reference <- mhChainVal[[1]][[rNum]]
+    rNum <- sample(1:length(mhChainVal), 1)
+    reference <- mhChainVal[[rNum]]
 
   }
 
   #Turn each val value into the distance from the reference
-  mhDists <- lapply(mhDraws, function(mhList){
+  mhDists <- lapply(mhDraws, function(mhChain){ #Enacted per chain
     #Extract val, ignore Posterior
-    mhList <- mhList$val
+    mhChain <- mhChain@val
 
     #Loop through val (as if it is a list, even if its only a vector) and calculate the distance between
     #the value and the reference for each
-    dist <- sapply(mhList, function(v){
+    dist <- sapply(mhChain, function(v){
       return(distance(v, reference))
     })
 

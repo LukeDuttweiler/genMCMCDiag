@@ -14,7 +14,7 @@ genDiagnostic(
 )
 }
 \arguments{
-\item{mhDraws}{A list of MCMC draws, where each element is a chain represented as an mcmcObj}
+\item{mhDraws}{A list of MCMC draws, where each element is a chain represented as an mcmcChain}
 
 \item{method}{Method for transforming the MCMC draws. Options include 'standard', 'ts', 'lanfear', or a custom transformation function. See details.}
 
@@ -35,15 +35,15 @@ This function generates diagnostics for Markov Chain Monte Carlo (MCMC) draws, t
 \details{
 Built-in transformation methods can be called with the appropriate character string in the 'method'
 argument. For details on a particular method use ?'method'Transform. Custom transform
-functions may be added as well. A custom function must be written to accept a list of mcmcObj
-type objects, and output a list of mcmcObj type objects (each element in the list is
+functions may be added as well. A custom function must be written to accept a list of mcmcChain
+type objects, and output a list of mcmcChain type objects (each element in the list is
 a chain).
 
 Built-in diagnostics can be called with the appropriate character string in the 'diagnostics'
 argument. Additional custom diagnostic functions may be written. These functions should
-act on a list of mcmcObj type objects, and may output in any format.
+act on a list of mcmcChain type objects, and may output in any format.
 
-For details on mcmcObj objects, see ?mcmcObj
+For details on mcmcChain objects, see ?mcmcChain
 }
 \examples{
 #Example using standard Traceplot

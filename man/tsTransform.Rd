@@ -2,7 +2,7 @@
 % Please edit documentation in R/transf-tsTransform.R
 \name{tsTransform}
 \alias{tsTransform}
-\title{Transforms a list of mcmcObjs into a list of data.frames using the TS transformation}
+\title{Transforms a list of mcmcChains into a list of data.frames using the TS transformation}
 \usage{
 tsTransform(
   mhDraws,
@@ -16,7 +16,7 @@ tsTransform(
 )
 }
 \arguments{
-\item{mhDraws}{List of mcmcObjs}
+\item{mhDraws}{List of mcmcChains}
 
 \item{distance}{Function defined on the space of MCMC draws. See details.}
 
@@ -42,7 +42,7 @@ draw and 't' which gives the within-chain ordering of the MCMC draws.
 Each data.frame is a separate chain.
 }
 \description{
-Transforms a list of mcmcObjs into a list of data.frames using the TS transformation
+Transforms a list of mcmcChains into a list of data.frames using the TS transformation
 }
 \details{
 The TS transformation sets up a traveling salesman algorithm by calculating the

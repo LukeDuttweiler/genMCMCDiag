@@ -2,12 +2,12 @@
 % Please edit documentation in R/transf-lanfearTransform.R
 \name{lanfearTransform}
 \alias{lanfearTransform}
-\title{Transforms a list of mcmcObjs into a list of data.frames using the Lanfear transformation}
+\title{Transforms a list of mcmcChains into a list of data.frames using the Lanfear transformation}
 \usage{
 lanfearTransform(mhDraws, distance, reference = NULL, ...)
 }
 \arguments{
-\item{mhDraws}{A list of mcmcObjs}
+\item{mhDraws}{A list of mcmcChains}
 
 \item{distance}{Distance function defined on the space of MCMC draws. See details.}
 
@@ -23,7 +23,7 @@ draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC dra
 which gives the within-chain ordering of the MCMC draws. Each data.frame is a separate chain.
 }
 \description{
-Transforms a list of mcmcObjs into a list of data.frames using the Lanfear transformation
+Transforms a list of mcmcChains into a list of data.frames using the Lanfear transformation
 }
 \details{
 The Lanfear transformation works by specifying a reference point and then comparing each
