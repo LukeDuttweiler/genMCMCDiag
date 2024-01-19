@@ -20,3 +20,6 @@ Imports:
     mcmcse (>= 1.0.0),
     methods (>= 4.0.0),
     knitr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
