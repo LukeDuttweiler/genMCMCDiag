@@ -56,8 +56,8 @@ hammingDist <- function(x,y){
 #' @export
 #'
 #' @examples
-#' x <- bnMCMCResults[[1]]$val[[1]]
-#' y <- bnMCMCResults[[1]]$val[[100]]
+#' x <- bnMCMCResults[[1]][[1]]
+#' y <- bnMCMCResults[[1]][[100]]
 #' partitionDist(x, y)
 partitionDist <- function(x, y){
   #Sort by nodes

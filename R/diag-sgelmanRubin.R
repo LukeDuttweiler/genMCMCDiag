@@ -14,7 +14,7 @@ sgelmanRubin <- function(mhDraws, ...){
 
   #Strip out unecessary info from mhDraws
   mhMCMC <- lapply(mhDraws, function(df){
-    return(coda::mcmc(df[grepl('val.1', names(df))]))
+    return(coda::mcmc(df[grepl('val', names(df))]))
   })
 
   #Make into mcmcm.list

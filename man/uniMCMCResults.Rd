@@ -8,11 +8,7 @@
 \subsection{\code{uniMCMCResults}}{
 
 A list with 7 elements, each representing a different MCMC chain. Each element is
-a data.frame with 2000 rows and 2 columns:
-\describe{
-\item{val.1}{MCMC draw at current iteration}
-\item{Posterior}{Posterior value of val.1}
-}
+a numeric vector of length 2000
 }
 }
 \source{

@@ -18,9 +18,9 @@ See lanfearTransform details.}
 \item{...}{Catches extra arguments. Not used.}
 }
 \value{
-List of data.frames with columns 'val.1' which is the Lanfear transformation of each MCMC
-draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC draw and 't'
-which gives the within-chain ordering of the MCMC draws. Each data.frame is a separate chain.
+List of data.frames with columns 'val' which is the Lanfear transformation of each MCMC
+draw, and 't' which gives the within-chain ordering of the MCMC draws.
+Each data.frame is a separate chain.
 }
 \description{
 Transforms a list of mcmcChains into a list of data.frames using the Lanfear transformation

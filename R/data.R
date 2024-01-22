@@ -6,11 +6,7 @@
 #'
 #' @format ## `uniMCMCResults`
 #' A list with 7 elements, each representing a different MCMC chain. Each element is
-#' a data.frame with 2000 rows and 2 columns:
-#' \describe{
-#'   \item{val.1}{MCMC draw at current iteration}
-#'   \item{Posterior}{Posterior value of val.1}
-#' }
+#' a numeric vector of length 2000
 #' @source Luke Duttweiler
 "uniMCMCResults"
 
@@ -21,10 +17,6 @@
 #'
 #' @format ## `bnMCMCResults`
 #' A list with 5 elements, each representing a different MCMC chain. Each element is
-#' a list with two elements
-#' \describe{
-#'   \item{val}{MCMC draw at current iteration}
-#'   \item{Posterior}{Posterior value of val}
-#' }
+#' a list of data.frames describing a partition arrangement of a Bayesian Network.
 #' @source Luke Duttweiler
 "bnMCMCResults"

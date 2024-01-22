@@ -26,24 +26,18 @@
 #' of each set. The sets are created by randomly selecting a representative draw and then
 #' putting the 'closest' draws with distance less than fuzzyDist into that set,
 #' until the set contains 1% of all unique draws. The fuzzy approximation can GREATLY
-#' reduce computation time, as is evidenced if the user specifies verbose = TRUE.
+#' reduce computation time, unless the fuzzyDistance specified is too small.
 #'
-#' @return List of data.frames with columns 'val.1' which is the TS transformation of each
-#'  MCMC draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC
-#'   draw and 't' which gives the within-chain ordering of the MCMC draws.
+#' @return List of data.frames with columns 'val' which is the TS transformation of each
+#'  MCMC draw, and 't' which gives the within-chain ordering of the MCMC draws.
 #' Each data.frame is a separate chain.
 #'
 #' @export
 tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
                         fuzzy = FALSE, fuzzyDist = .2, verbose = TRUE, ...){
 
-  #Put all draws in a single vector
-  allDraws <- lapply(mhDraws, function(mhChain){
-    return(mhChain@val)
-  })
-
   #Combine one level
-  allDraws <- do.call('c', allDraws)
+  allDraws <- do.call('c', mhDraws)
 
   #Make labels for all draws. Draws that are identical have the same label
   allDrawLabels <- listLabels(allDraws)
@@ -276,7 +270,7 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
 
     chainR <- trueYAx[((chain + (optR-2)) %% length(uniqueLabels)) + 1]
 
-    return(data.frame('val.1' = chainR, 't' = 1:length(chainR)))
+    return(data.frame('val' = chainR, 't' = 1:length(chainR)))
   })
 
   #Return transformed chains

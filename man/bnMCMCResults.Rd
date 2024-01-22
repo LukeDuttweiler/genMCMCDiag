@@ -8,11 +8,7 @@
 \subsection{\code{bnMCMCResults}}{
 
 A list with 5 elements, each representing a different MCMC chain. Each element is
-a list with two elements
-\describe{
-\item{val}{MCMC draw at current iteration}
-\item{Posterior}{Posterior value of val}
-}
+a list of data.frames describing a partition arrangement of a Bayesian Network.
 }
 }
 \source{

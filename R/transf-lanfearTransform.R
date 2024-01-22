@@ -12,9 +12,9 @@
 #' MCMC draw back to that reference point using a distance function. The function returns
 #' this distance value as the Lanfear transformation of each draw.
 #'
-#' @return List of data.frames with columns 'val.1' which is the Lanfear transformation of each MCMC
-#' draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC draw and 't'
-#' which gives the within-chain ordering of the MCMC draws. Each data.frame is a separate chain.
+#' @return List of data.frames with columns 'val' which is the Lanfear transformation of each MCMC
+#' draw, and 't' which gives the within-chain ordering of the MCMC draws.
+#' Each data.frame is a separate chain.
 #'
 #' @export
 lanfearTransform <- function(mhDraws, distance, reference = NULL, ...){
@@ -25,18 +25,14 @@ lanfearTransform <- function(mhDraws, distance, reference = NULL, ...){
 
     #Select a random value from that chain
     mhChain <- mhDraws[[rChain]]
-    mhChainVal <- mhChain@val
 
-    rNum <- sample(1:length(mhChainVal), 1)
-    reference <- mhChainVal[[rNum]]
+    rNum <- sample(1:length(mhChain), 1)
+    reference <- mhChain[[rNum]]
 
   }
 
   #Turn each val value into the distance from the reference
   mhDists <- lapply(mhDraws, function(mhChain){ #Enacted per chain
-    #Extract val, ignore Posterior
-    mhChain <- mhChain@val
-
     #Loop through val (as if it is a list, even if its only a vector) and calculate the distance between
     #the value and the reference for each
     dist <- sapply(mhChain, function(v){
@@ -44,7 +40,7 @@ lanfearTransform <- function(mhDraws, distance, reference = NULL, ...){
     })
 
     #Notice we name distance as val in the dataframe for future functions
-    return(data.frame(val.1 = dist, t = 1:length(dist)))
+    return(data.frame(val = dist, t = 1:length(dist)))
   })
 
   #Return transformed chains

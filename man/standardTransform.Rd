@@ -7,16 +7,15 @@
 standardTransform(mhDraws, ...)
 }
 \arguments{
-\item{mhDraws}{An list of mcmcChains}
+\item{mhDraws}{An list of numeric vectors}
 
 \item{...}{Not used.}
 }
 \value{
-A list of data.frames with rows that represent MCMC draws.
-Columns named 'val.1', 'val.2',... contain different dimensions of the draws,
-column named 'Posterior' contains (non-normalized) posterior value of the draw and column
-named 't' gives the within-chain ordering of the draws. Each separate data.frame is a
-different chain.
+A list of data.frames with rows that represent MCMC draws.Each separate data.frame is a
+different chain. Data.frames have columns 'val' for the numeric draws, and 't' for the
+draw. Currently, using the standard transformation on anything other than univariate
+draws is not supported.
 
 @export
 }

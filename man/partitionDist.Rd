@@ -23,7 +23,7 @@ For speed, no error handling if x and y do not have the same dimensions. Also,
 does not test to make sure x,y are integers, take care!
 }
 \examples{
-x <- bnMCMCResults[[1]]$val[[1]]
-y <- bnMCMCResults[[1]]$val[[100]]
+x <- bnMCMCResults[[1]][[1]]
+y <- bnMCMCResults[[1]][[100]]
 partitionDist(x, y)
 }

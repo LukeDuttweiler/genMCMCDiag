@@ -36,9 +36,8 @@ computation time}
 \item{...}{Catches extra arguments. Not used.}
 }
 \value{
-List of data.frames with columns 'val.1' which is the TS transformation of each
-MCMC draw, 'Posterior' which is the (non-normalized) posterior value of each MCMC
-draw and 't' which gives the within-chain ordering of the MCMC draws.
+List of data.frames with columns 'val' which is the TS transformation of each
+MCMC draw, and 't' which gives the within-chain ordering of the MCMC draws.
 Each data.frame is a separate chain.
 }
 \description{
@@ -58,5 +57,5 @@ and fitting the NN algorithm within each set, and then on the resulting 'end poi
 of each set. The sets are created by randomly selecting a representative draw and then
 putting the 'closest' draws with distance less than fuzzyDist into that set,
 until the set contains 1\% of all unique draws. The fuzzy approximation can GREATLY
-reduce computation time, as is evidenced if the user specifies verbose = TRUE.
+reduce computation time, unless the fuzzyDistance specified is too small.
 }

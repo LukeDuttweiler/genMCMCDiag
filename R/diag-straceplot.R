@@ -19,7 +19,7 @@ straceplot <- function(mhDraws, method = NULL, ...){
   pltList <- lapply(1:nChain, function(i){
     chain <- mhDraws[[i]]
     chain$Chain <- i
-    return(chain[,c('t', 'val.1', 'Chain')])
+    return(chain[,c('t', 'val', 'Chain')])
   })
   pltDF <- do.call('rbind', pltList)
 
@@ -35,7 +35,7 @@ straceplot <- function(mhDraws, method = NULL, ...){
   }
 
   #make plot
-  plt <- ggplot2::ggplot(data = pltDF) + ggplot2::geom_line(ggplot2::aes(x = t, y = val.1, col = Chain))
+  plt <- ggplot2::ggplot(data = pltDF) + ggplot2::geom_line(ggplot2::aes(x = t, y = val, col = Chain))
   plt <- plt + ggplot2::theme_bw() + ggplot2::ggtitle(title) + ggplot2::theme(legend.position = 'none')
   return(plt)
 }
