@@ -6,15 +6,23 @@
 #' @return A character vector of labels. Objects in lst that are identical will be assigned
 #' the same label.
 listLabels <- function(lst){
-  #Which vals are duplicated?
+  #Much faster if we can use the grouping function, not all versions are supported so we adjust
+  if(is.numeric(lst)){
+    grs <- grouping(as.character(lst))
+    ends <- attr(grs, 'ends')
+    indices <- rep(seq_along(ends), c(ends[1], diff(ends)))[order(grs)]
+    return(as.character(indices))
+  }
+
+  #If not a numeric, go through more complicated version
   dupVals <- duplicated(lst)
 
   #Create list to save unique values and vector to save unique labels
-  uniqueVals <- vector('list', sum(!dupVals))
+  uniqueVals <- vector('list',  sum(!dupVals))
   uniqueLabels <- vector('character', sum(!dupVals))
 
   #Create vector of labels for the values of lst
-  lstLabels <- vector('character', length(dupVals))
+  lstLabels <- vector('character', length(lst))
 
   #Index of how many spots in uniqueVals and labels have been filled
   j <- 0

@@ -9,3 +9,8 @@ test_that('standard transform returns as expected', {
 
   expect_identical(standardTransform(tstObj), expectObj)
 })
+
+test_that('standard transform throws appropriate error when given a list of lists', {
+  testObject <- list(list(1:3), list(2:4))
+  expect_error(standardTransform(testObject), regexp = 'standard transformation')
+})

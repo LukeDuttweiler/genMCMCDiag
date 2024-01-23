@@ -3,6 +3,11 @@ test_that('listLabels produces unique labels as expected', {
                    c('1', '2', '3', '2', '4', '2', '1'))
 })
 
+test_that('listLabels produces unique labels ordered by the original', {
+  expect_identical(listLabels(c(4,3,1,2)),
+                   c('1', '2', '3', '4'))
+})
+
 test_that('listLabels works on list of matrices', {
   m1 <- matrix(0, nrow = 2, ncol = 2)
   m2 <- matrix(c(1,0,0,0), nrow = 2, ncol = 2)
