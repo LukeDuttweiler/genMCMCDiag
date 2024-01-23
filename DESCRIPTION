@@ -1,6 +1,6 @@
 Package: genMCMCDiag
 Title: Generalized Convergence Diagnostics for Complicated MCMC Algorithms
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person("Luke", "Duttweiler", email = "lduttweiler@hsph.harvard.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0467-995X"))
