@@ -8,18 +8,18 @@ Description: Traceplots and convergence diagnostics for highly multivariate or u
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 URL: https://github.com/LukeDuttweiler/genMCMCDiag
 BugReports: https://github.com/LukeDuttweiler/genMCMCDiag/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
 LazyData: true
 Imports:
     ggplot2 (>= 3.0.0),
     coda (>= 0.19.0),
     mcmcse (>= 1.0.0),
     methods (>= 4.0.0),
-    knitr,
+    knitr (>= 1.45)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

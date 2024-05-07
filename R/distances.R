@@ -1,3 +1,6 @@
+#Line to get CRAN to accept package
+if(getRversion() >= "2.15.1")  utils::globalVariables(c('A'))
+
 #' Euclidean Distance
 #'
 #' Simple function to return the Euclidean distance between two objects. Acts elementwise.

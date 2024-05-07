@@ -1,3 +1,6 @@
+#Line to get CRAN to accept package, (ggplot causes problems)
+if(getRversion() >= "2.15.1")  utils::globalVariables(c('val', 'Chain'))
+
 #' Generate a traceplot of MCMC draws from an mcmcObj
 #'
 #' @param mhDraws Object of class mcmcObj
