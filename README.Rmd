@@ -1,0 +1,63 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# genMCMCDiag
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Determining the convergence of Markov Chain Monte Carlo (MCMC) algorithms run on highly-dimensional or un-ordered spaces is an active area of research. This package implements several distance based algorithms for the creation of diagnostics in these situations. A forthcoming paper describes the methodology used in detail. 
+
+## Installation
+
+``` r
+#Install from CRAN
+install.packages('genMCMCDiag')
+
+#Install from gitHub
+# install.packages("devtools")
+devtools::install_github("LukeDuttweiler/genMCMCDiag")
+```
+
+## A Simple Example
+
+Consider the results of a multi-chain MCMC algorithm over a univariate space. The `genMCMCDiag` package provides a simple interface to retrieve traceplots, the effective sample size (ESS), and the Gelman-Rubin (GR) diagnostic. 
+
+We demonstrate the usage of `genMCMCDiag` in this simple scenario, using the included simulated MCMC results `uniMCMCResults`. The output of `genDiagnostic` is a traceplot and tables containing the ESS and GR results. The method is set to 'standard' here as we don't want to transform the data prior to running the diagnostics, as it is already univariate. 
+
+```{r example1}
+#Load package
+library(genMCMCDiag)
+
+#View structure of uniMCMCResults
+str(uniMCMCResults)
+
+#View Diagnostics
+genDiagnostic(uniMCMCResults, method = 'standard')
+```
+
+
+## A More Complex Example
+
+Consider the results of a more complex multi-chain MCMC algorithm run on the space of Bayesian network (BN) partitions. The space of BN partitions does not have a natural distance based order (unlike the real-line used in the previous example), and so standard traceplots and MCMC diagnostics cannot be used. 
+
+`genMCMCDiag` includes transformation methods to help deal with this issue, based on a user-supplied (or built in) distance function. In this instance we will use the built-in `partitionDistance` and the `ts` transformation method (details to be published in a forthcoming paper), to view a diagnostic traceplot and transformed calculations of the ESS and GR diagnostics. 
+
+```{r}
+#View Diagnostics from ts method
+genDiagnostic(bnMCMCResults, method = 'ts', distance = partitionDist)
+```
+
+The diagnostic results clearly reveal a complete lack of mixing!
