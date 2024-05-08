@@ -90,6 +90,8 @@ partitionDist <- function(x, y){
 #'
 #' @return Numeric, DPMM distance between x and y.
 #'
+#' @export
+#'
 dpmmDistance <- function(x, y){
   #Extract elements
   Zx <- x$Zscore
