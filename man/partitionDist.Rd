@@ -20,7 +20,7 @@ Networks with the 'partition-MCMC' algorithm.
 }
 \note{
 For speed, no error handling if x and y do not have the same dimensions. Also,
-does not test to make sure x,y are integers, take care!
+does not test to make sure x,y are data.frames of integers, take care!
 }
 \examples{
 x <- bnMCMCResults[[1]][[1]]

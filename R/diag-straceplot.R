@@ -1,9 +1,9 @@
 #Line to get CRAN to accept package, (ggplot causes problems)
 if(getRversion() >= "2.15.1")  utils::globalVariables(c('val', 'Chain'))
 
-#' Generate a traceplot of MCMC draws from an mcmcObj
+#' Generate a traceplot of draws from a multi-chain MCMC
 #'
-#' @param mhDraws Object of class mcmcObj
+#' @param mhDraws List of data.frames with two columns. Each data.frame represents a single chain. Column names should be val.1 (for values) and t (for chain iteration).
 #' @param method Character string - Name of method used to generate traceplot. Is used to generate the title of the traceplot.
 #' @param ... Catches unused arguments
 #'

@@ -1,6 +1,6 @@
-#' Calculate the effective sample size, per chain and in total, of MCMC draws from an mcmcObj
+#' Calculate the effective sample size, per chain and in total, of draws from an MCMC algorithm
 #'
-#' @param mhDraws Object of mcmcObj class
+#' @param mhDraws List of data.frames. Each data.frame represents a single chain. Data.frame columns for which ESS is calculated should be named val.1, ..., val.k
 #' @param ... Catches unnecessary additional arguments
 #'
 #' @return Data.frame with 1 Row and (# Chains + 1) Columns. Each entry gives the estimated ESS for the chain or sum of chains.

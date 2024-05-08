@@ -1,6 +1,6 @@
-#' Calculate Gelman-Rubin statistic for multi-chain samples of a univariate (or transformed univariate) MCMC algorith from an mcmcObj
+#' Calculate the Gelman-Rubin diagnostic of draws from an MCMC algorithm
 #'
-#' @param mhDraws Object of mcmcObj class
+#' @param mhDraws List of data.frames with two columns. Each data.frame represents a single chain. Column names should be val.1 (for values) and t (for chain iteration).
 #' @param ... Catches unnecessary additional arguments
 #'
 #' @return Data.frame with 1 row and 2 columns. First entry gives estimated GR statistic, second gives upper 95% limit for GR statistic.

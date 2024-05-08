@@ -2,12 +2,12 @@
 % Please edit documentation in R/diag-straceplot.R
 \name{straceplot}
 \alias{straceplot}
-\title{Generate a traceplot of MCMC draws from an mcmcObj}
+\title{Generate a traceplot of draws from a multi-chain MCMC}
 \usage{
 straceplot(mhDraws, method = NULL, ...)
 }
 \arguments{
-\item{mhDraws}{Object of class mcmcObj}
+\item{mhDraws}{List of data.frames with two columns. Each data.frame represents a single chain. Column names should be val.1 (for values) and t (for chain iteration).}
 
 \item{method}{Character string - Name of method used to generate traceplot. Is used to generate the title of the traceplot.}
 
@@ -17,5 +17,5 @@ straceplot(mhDraws, method = NULL, ...)
 ggplot2 plot object showing traceplot
 }
 \description{
-Generate a traceplot of MCMC draws from an mcmcObj
+Generate a traceplot of draws from a multi-chain MCMC
 }

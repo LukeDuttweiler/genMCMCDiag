@@ -2,25 +2,25 @@
 % Please edit documentation in R/genDiagnostic.R
 \name{genDiagnostic}
 \alias{genDiagnostic}
-\title{Generate Diagnostics for Markov Chain Monte Carlo Draws}
+\title{Generate Generalized Diagnostics for Markov Chain Monte Carlo Draws}
 \usage{
 genDiagnostic(
   mhDraws,
   method = c("standard", "ts", "lanfear", "likelihood"),
   diagnostics = c("traceplot", "ess", "gelmanRubin"),
   distance = NULL,
-  verbose = TRUE,
+  verbose = FALSE,
   ...
 )
 }
 \arguments{
-\item{mhDraws}{A list of MCMC draws, where each element is a list or numeric vector representing the output of a single MCMC chain.}
+\item{mhDraws}{A list of MCMC draws, where each element is an ordered list or numeric vector representing the output of a single MCMC chain.}
 
 \item{method}{Method for transforming the MCMC draws. Options include 'standard', 'ts', 'lanfear', or a custom transformation function. See details.}
 
 \item{diagnostics}{A character vector or list of diagnostic functions to be evaluated. Options include 'traceplot', 'ess', 'gelmanRubin', or custom functions. See details.}
 
-\item{distance}{Function for evaluating distance between MCMC draws if required by 'method'. Note that the lanfear and ts methods ALWAYS require a distance function.}
+\item{distance}{Function for evaluating distance between MCMC draws if required by 'method'. This should be a pairwise distance function that operates on elements of the chains from mhDraws. Note that the lanfear and ts methods ALWAYS require a distance function.}
 
 \item{verbose}{If TRUE, informative messages are displayed.}
 
@@ -41,7 +41,7 @@ See lanfearTransform details.}
 An object of class 'mcmcDiag', containing evaluated diagnostics, transformed draws, and function call details.
 }
 \description{
-This function generates diagnostics for Markov Chain Monte Carlo (MCMC) draws, transforming the draws if specified, and evaluating selected diagnostics.
+This function generates generalized diagnostics for Markov Chain Monte Carlo (MCMC) draws, transforming the draws if specified, and evaluating selected diagnostics.
 }
 \details{
 Built-in transformation methods can be called with the appropriate character string in the 'method'

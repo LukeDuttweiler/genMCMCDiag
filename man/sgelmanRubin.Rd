@@ -2,12 +2,12 @@
 % Please edit documentation in R/diag-sgelmanRubin.R
 \name{sgelmanRubin}
 \alias{sgelmanRubin}
-\title{Calculate Gelman-Rubin statistic for multi-chain samples of a univariate (or transformed univariate) MCMC algorith from an mcmcObj}
+\title{Calculate the Gelman-Rubin diagnostic of draws from an MCMC algorithm}
 \usage{
 sgelmanRubin(mhDraws, ...)
 }
 \arguments{
-\item{mhDraws}{Object of mcmcObj class}
+\item{mhDraws}{List of data.frames with two columns. Each data.frame represents a single chain. Column names should be val.1 (for values) and t (for chain iteration).}
 
 \item{...}{Catches unnecessary additional arguments}
 }
@@ -15,5 +15,5 @@ sgelmanRubin(mhDraws, ...)
 Data.frame with 1 row and 2 columns. First entry gives estimated GR statistic, second gives upper 95\% limit for GR statistic.
 }
 \description{
-Calculate Gelman-Rubin statistic for multi-chain samples of a univariate (or transformed univariate) MCMC algorith from an mcmcObj
+Calculate the Gelman-Rubin diagnostic of draws from an MCMC algorithm
 }

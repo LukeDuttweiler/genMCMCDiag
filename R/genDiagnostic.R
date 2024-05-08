@@ -1,11 +1,11 @@
-#' Generate Diagnostics for Markov Chain Monte Carlo Draws
+#' Generate Generalized Diagnostics for Markov Chain Monte Carlo Draws
 #'
-#' This function generates diagnostics for Markov Chain Monte Carlo (MCMC) draws, transforming the draws if specified, and evaluating selected diagnostics.
+#' This function generates generalized diagnostics for Markov Chain Monte Carlo (MCMC) draws, transforming the draws if specified, and evaluating selected diagnostics.
 #'
-#' @param mhDraws A list of MCMC draws, where each element is a list or numeric vector representing the output of a single MCMC chain.
+#' @param mhDraws A list of MCMC draws, where each element is an ordered list or numeric vector representing the output of a single MCMC chain.
 #' @param method Method for transforming the MCMC draws. Options include 'standard', 'ts', 'lanfear', or a custom transformation function. See details.
 #' @param diagnostics A character vector or list of diagnostic functions to be evaluated. Options include 'traceplot', 'ess', 'gelmanRubin', or custom functions. See details.
-#' @param distance Function for evaluating distance between MCMC draws if required by 'method'. Note that the lanfear and ts methods ALWAYS require a distance function.
+#' @param distance Function for evaluating distance between MCMC draws if required by 'method'. This should be a pairwise distance function that operates on elements of the chains from mhDraws. Note that the lanfear and ts methods ALWAYS require a distance function.
 #' @param verbose If TRUE, informative messages are displayed.
 #' @inheritDotParams tsTransform minDist fuzzy fuzzyDist
 #' @inheritDotParams lanfearTransform reference
@@ -52,7 +52,7 @@ genDiagnostic <- function(mhDraws,
                           method = c('standard', 'ts', 'lanfear', 'likelihood'),
                           diagnostics = c('traceplot', 'ess', 'gelmanRubin'),
                           distance = NULL,
-                          verbose = TRUE,
+                          verbose = FALSE,
                           ...){
   #Catch arguments, except for full draws
   argg <- as.list(environment())[-1]
