@@ -4,7 +4,7 @@ Version: 0.2.0
 Authors@R: 
     person("Luke", "Duttweiler", email = "lduttweiler@hsph.harvard.edu", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-0467-995X"))
-Description: Traceplots and convergence diagnostics for Markov Chain Monte Carlo (MCMC) algorithms on highly multivariate or unordered spaces. Methods outlined in a forthcoming paper.
+Description: Trace plots and convergence diagnostics for Markov Chain Monte Carlo (MCMC) algorithms on highly multivariate or unordered spaces. Methods outlined in a forthcoming paper.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

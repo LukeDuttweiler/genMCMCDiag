@@ -39,12 +39,9 @@
 #'
 #'
 #' #Example using bayesian network sample data, with 'lanfear' method
-#' tstBN1 <- genDiagnostic(bnMCMCResults, method = 'lanfear', distance = partitionDist)
-#' tstBN1
+#' tstBN <- genDiagnostic(bnMCMCResults, method = 'lanfear', distance = partitionDist)
+#' tstBN
 #'
-#' #Example using bayesian network sample data, with 'ts' method
-#' tstBN2 <- genDiagnostic(bnMCMCResults, method = 'ts', distance = partitionDist)
-#' tstBN2
 genDiagnostic <- function(mhDraws,
                           method = c('standard', 'ts', 'lanfear', 'likelihood'),
                           diagnostics = c('traceplot', 'ess', 'gelmanRubin'),
