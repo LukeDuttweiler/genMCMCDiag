@@ -4,14 +4,19 @@
 \alias{print.mcmcDiag}
 \title{Print method for mcmcDiag objects}
 \usage{
-\method{print}{mcmcDiag}(x)
+\method{print}{mcmcDiag}(x, ...)
 }
 \arguments{
 \item{x}{Object of class mcmcDiag}
+
+\item{...}{Kept for consistency with print. Does nothing.}
 }
 \value{
 Invisible NULL, prints to console
 }
 \description{
 Print method for mcmcDiag objects
+}
+\examples{
+print(genDiagnostic(uniMCMCResults))
 }

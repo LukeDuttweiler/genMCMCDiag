@@ -1,10 +1,14 @@
 #' Print method for mcmcDiag objects
 #'
 #' @param x Object of class mcmcDiag
+#' @param ... Kept for consistency with print. Does nothing.
 #'
 #' @return Invisible NULL, prints to console
 #' @export
-print.mcmcDiag <- function(x){
+#'
+#' @examples
+#' print(genDiagnostic(uniMCMCResults))
+print.mcmcDiag <- function(x, ...){
                      #Extract method
                      m <- x$call$arguments$method
 

@@ -4,6 +4,9 @@
 # genMCMCDiag
 
 <!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 Determining the convergence of Markov Chain Monte Carlo (MCMC)
@@ -92,7 +95,6 @@ and GR diagnostics.
 ``` r
 #View Diagnostics from ts method
 genDiagnostic(bnMCMCResults, method = 'ts', distance = partitionDist)
-#> Estimated time is approximately 0 minutes. May be faster.
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />

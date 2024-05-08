@@ -37,15 +37,12 @@
 #'                       reference = 0)
 #' tstL
 #'
-#' #Example using 'ts' traceplot (not run here for sake of time during package build)
-#' #tstTS <- genDiagnostic(uniMCMCResults, method = 'ts', distance = eucDist,
-#' #                        fuzzy = TRUE, fuzzyDist = .5)
-#' #tstTS
 #'
-#' #Examples using bayesian network sample data
+#' #Example using bayesian network sample data, with 'lanfear' method
 #' tstBN1 <- genDiagnostic(bnMCMCResults, method = 'lanfear', distance = partitionDist)
 #' tstBN1
 #'
+#' #Example using bayesian network sample data, with 'ts' method
 #' tstBN2 <- genDiagnostic(bnMCMCResults, method = 'ts', distance = partitionDist)
 #' tstBN2
 genDiagnostic <- function(mhDraws,

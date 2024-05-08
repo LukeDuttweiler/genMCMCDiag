@@ -4,9 +4,9 @@
 \name{genMCMCDiag-package}
 \alias{genMCMCDiag}
 \alias{genMCMCDiag-package}
-\title{genMCMCDiag: Generalized Convergence Diagnostics for Complicated MCMC Algorithms}
+\title{genMCMCDiag: Generalized Convergence Diagnostics for Difficult MCMC Algorithms}
 \description{
-Traceplots and convergence diagnostics for highly multivariate or unordered MCMC algorithms. Methods outlined in a forthcoming paper.
+Traceplots and convergence diagnostics for Markov Chain Monte Carlo (MCMC) algorithms on highly multivariate or unordered spaces. Methods outlined in a forthcoming paper.
 }
 \seealso{
 Useful links:
@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Luke Duttweiler \email{lduttweiler@hsph.harvard.edu} (\href{https://orcid.org/0000-0002-0467-995X}{ORCID})
+\strong{Maintainer}: Luke Duttweiler \email{lduttweiler@hsph.harvard.edu} (\href{https://orcid.org/0000-0002-0467-995X}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}
