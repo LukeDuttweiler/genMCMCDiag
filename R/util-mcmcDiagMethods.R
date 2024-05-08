@@ -1,34 +1,12 @@
-#' mcmcDiag Class Definition
+#' Print method for mcmcDiag objects
 #'
-#' A class for storing and handling MCMC diagnostics.
+#' @param x Object of class mcmcDiag
 #'
-#' @slot diagnostics A list containing MCMC diagnostic information.
-#' @slot transformedDraws A list containing transformed MCMC draws.
-#' @slot call A list containing information about the function call.
-#'
-#' @docType class
-#' @name mcmcDiag-class
-#' @rdname mcmcDiag-class
-#' @exportClass mcmcDiag
-mcmcDiag <- setClass("mcmcDiag", slots = c(diagnostics="list", transformedDraws="list",
-                                           call = 'list'))
-
-
-#' Print Method for mcmcDiag Objects
-#'
-#' Prints MCMC diagnostics and relevant information.
-#'
-#' @param x An object of class \code{mcmcDiag}.
-#'
-#' @return Prints MCMC diagnostics to the console.
-#'
-#' @exportMethod print
-#' @aliases print.mcmcDiag
-methods::setMethod('print',
-                   signature(x = 'mcmcDiag'),
-                   function(x){
+#' @return Invisible NULL, prints to console
+#' @export
+print.mcmcDiag <- function(x){
                      #Extract method
-                     m <- x@call$arguments$method
+                     m <- x$call$arguments$method
 
                      #Change to 'Custom' if custom function was used
                      if(!is.character(m)){
@@ -36,7 +14,7 @@ methods::setMethod('print',
                      }
 
                      #Extract diagnostics
-                     diags <- x@diagnostics
+                     diags <- x$diagnostics
 
                      #Special handling for traceplot
                      if('traceplot' %in% names(diags)){
@@ -61,27 +39,5 @@ methods::setMethod('print',
                        }
                        cat(catStr)
                      }
-                   })
-
-#' Show - Inherited from package 'methods'
-#' @importFrom methods show
-#' @inheritParams methods::show
-#' @inherit methods::show
-#' @export
-show <- methods::show
-
-#' Show Method for mcmcDiag Objects
-#'
-#' Displays the content of an object of class \code{mcmcDiag}.
-#'
-#' @param object An object of class \code{mcmcDiag}.
-#'
-#' @return Displays the content of the object.
-#'
-#' @exportMethod show
-#' @aliases show.mcmcDiag
-methods::setMethod('show',
-                   signature = 'mcmcDiag',
-                   definition = function(object){
-                     print(object)
-                   })
+                     return(invisible(NULL))
+                   }

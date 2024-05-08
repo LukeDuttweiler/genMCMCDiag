@@ -19,6 +19,6 @@ bnMCMCResults
 }
 \description{
 Results from a Bayesian Network Metropolis-Hastings algorithm run on simulated data.
-Included for examples
+Included for examples.
 }
 \keyword{datasets}
