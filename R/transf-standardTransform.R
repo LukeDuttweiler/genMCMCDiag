@@ -1,4 +1,4 @@
-#' Transforms a list of mcmcChains into a list of dataframes with no modifications to values
+#' Transforms a list of MCMC chains into a list of dataframes with no modifications to values
 #'
 #' @param mhDraws An list of numeric vectors
 #' @param ... Not used.
@@ -8,7 +8,6 @@
 #'  draw. Currently, using the standard transformation on anything other than univariate
 #'  draws is not supported.
 #'
-#'  @export
 standardTransform <- function(mhDraws, ...){
   #Check to make sure this will work
   if(!is.numeric(mhDraws[[1]])){

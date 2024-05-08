@@ -137,9 +137,6 @@ genDiagnostic <- function(mhDraws,
   })
   names(diagRet) <- diagNames
 
-  #retObj <- methods::new('mcmcDiag', diagnostics = diagRet, transformedDraws = mhTransformed,
-  #              call = list(arguments = argg,
-  #                          methodArguments = methodArgs))
   retObj <- list(diagnostics = diagRet, transformedDraws = mhTransformed,
                  call = list(arguments = argg, methodArguments = methodArgs))
   class(retObj) <- c('mcmcDiag', 'list')

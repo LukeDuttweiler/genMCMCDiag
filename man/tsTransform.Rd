@@ -2,25 +2,22 @@
 % Please edit documentation in R/transf-tsTransform.R
 \name{tsTransform}
 \alias{tsTransform}
-\title{Transforms a list of mcmcChains into a list of data.frames using the TS transformation}
+\title{Transforms a list of MCMC chains into a list of data.frames using the TS transformation}
 \usage{
 tsTransform(
   mhDraws,
   distance,
-  maxRotations = Inf,
   minDist = 0,
   fuzzy = FALSE,
-  fuzzyDist = 0.2,
-  verbose = TRUE,
+  fuzzyDist = 1,
+  verbose = FALSE,
   ...
 )
 }
 \arguments{
-\item{mhDraws}{List of mcmcChains}
+\item{mhDraws}{List. Each element is a single chain from an MCMC algorithm. Each element should be a numeric vector (for univariate draws), or a list.}
 
-\item{distance}{Function defined on the space of MCMC draws. See details.}
-
-\item{maxRotations}{Integer. Unecessary to specify. Will be removed soon.}
+\item{distance}{Distance function defined on the space of MCMC draws. Should operate pairwise on the elements of the given chains. See details.}
 
 \item{minDist}{Numeric. Value which specifies the minimum possible distance for two draws
 which are not equal. See tsTransform details.}
@@ -28,7 +25,7 @@ which are not equal. See tsTransform details.}
 \item{fuzzy}{Logical. If TRUE computes an approximate version of the TS algorithm.
 See tsTransform details.}
 
-\item{fuzzyDist}{Numeric. Parameter for approximate version of ts algorithm.}
+\item{fuzzyDist}{Numeric. Parameter for approximate version of ts algorithm. See tsTransform details.}
 
 \item{verbose}{Logical. If TRUE, function prints out information about approximate
 computation time}
@@ -41,7 +38,7 @@ MCMC draw, and 't' which gives the within-chain ordering of the MCMC draws.
 Each data.frame is a separate chain.
 }
 \description{
-Transforms a list of mcmcChains into a list of data.frames using the TS transformation
+Transforms a list of MCMC chains into a list of data.frames using the TS transformation
 }
 \details{
 The TS transformation sets up a traveling salesman algorithm by calculating the

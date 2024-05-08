@@ -1,8 +1,8 @@
-#' Transforms a list of mcmcChains into a list of data.frames using the Lanfear transformation
+#' Transforms a list of MCMC chains into a list of data.frames using the Lanfear transformation
 #'
-#' @param mhDraws A list of mcmcChains
-#' @param distance Distance function defined on the space of MCMC draws. See details.
-#' @param reference Reference point for lanfearTransform (with exact same structure as each MCMC draw)
+#' @param mhDraws List. Each element is a single chain from an MCMC algorithm. Each element should be a numeric vector (for univariate draws), or a list.
+#' @param distance Distance function defined on the space of MCMC draws. Should operate pairwise on the elements of the given chains. See details.
+#' @param reference Argument for method = 'lanfear'. Reference point for lanfearTransform (with exact same structure as each MCMC draw)
 #'  for draw comparison. If left NULL a random point is selected from the given draws.
 #'  See lanfearTransform details.
 #' @param ... Catches extra arguments. Not used.
@@ -16,7 +16,6 @@
 #' draw, and 't' which gives the within-chain ordering of the MCMC draws.
 #' Each data.frame is a separate chain.
 #'
-#' @export
 lanfearTransform <- function(mhDraws, distance, reference = NULL, ...){
   #if reference isn't specified, select a random reference
   if(is.null(reference)){

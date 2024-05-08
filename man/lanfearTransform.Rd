@@ -2,16 +2,16 @@
 % Please edit documentation in R/transf-lanfearTransform.R
 \name{lanfearTransform}
 \alias{lanfearTransform}
-\title{Transforms a list of mcmcChains into a list of data.frames using the Lanfear transformation}
+\title{Transforms a list of MCMC chains into a list of data.frames using the Lanfear transformation}
 \usage{
 lanfearTransform(mhDraws, distance, reference = NULL, ...)
 }
 \arguments{
-\item{mhDraws}{A list of mcmcChains}
+\item{mhDraws}{List. Each element is a single chain from an MCMC algorithm. Each element should be a numeric vector (for univariate draws), or a list.}
 
-\item{distance}{Distance function defined on the space of MCMC draws. See details.}
+\item{distance}{Distance function defined on the space of MCMC draws. Should operate pairwise on the elements of the given chains. See details.}
 
-\item{reference}{Reference point for lanfearTransform (with exact same structure as each MCMC draw)
+\item{reference}{Argument for method = 'lanfear'. Reference point for lanfearTransform (with exact same structure as each MCMC draw)
 for draw comparison. If left NULL a random point is selected from the given draws.
 See lanfearTransform details.}
 
@@ -23,7 +23,7 @@ draw, and 't' which gives the within-chain ordering of the MCMC draws.
 Each data.frame is a separate chain.
 }
 \description{
-Transforms a list of mcmcChains into a list of data.frames using the Lanfear transformation
+Transforms a list of MCMC chains into a list of data.frames using the Lanfear transformation
 }
 \details{
 The Lanfear transformation works by specifying a reference point and then comparing each

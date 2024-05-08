@@ -2,7 +2,7 @@
 % Please edit documentation in R/transf-standardTransform.R
 \name{standardTransform}
 \alias{standardTransform}
-\title{Transforms a list of mcmcChains into a list of dataframes with no modifications to values}
+\title{Transforms a list of MCMC chains into a list of dataframes with no modifications to values}
 \usage{
 standardTransform(mhDraws, ...)
 }
@@ -16,9 +16,7 @@ A list of data.frames with rows that represent MCMC draws.Each separate data.fra
 different chain. Data.frames have columns 'val' for the numeric draws, and 't' for the
 draw. Currently, using the standard transformation on anything other than univariate
 draws is not supported.
-
-@export
 }
 \description{
-Transforms a list of mcmcChains into a list of dataframes with no modifications to values
+Transforms a list of MCMC chains into a list of dataframes with no modifications to values
 }

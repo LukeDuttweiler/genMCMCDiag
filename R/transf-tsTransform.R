@@ -1,13 +1,12 @@
-#' Transforms a list of mcmcChains into a list of data.frames using the TS transformation
+#' Transforms a list of MCMC chains into a list of data.frames using the TS transformation
 #'
-#' @param mhDraws List of mcmcChains
-#' @param distance Function defined on the space of MCMC draws. See details.
-#' @param maxRotations Integer. Unecessary to specify. Will be removed soon.
+#' @param mhDraws List. Each element is a single chain from an MCMC algorithm. Each element should be a numeric vector (for univariate draws), or a list.
+#' @param distance Distance function defined on the space of MCMC draws. Should operate pairwise on the elements of the given chains. See details.
 #' @param minDist Numeric. Value which specifies the minimum possible distance for two draws
 #' which are not equal. See tsTransform details.
 #' @param fuzzy Logical. If TRUE computes an approximate version of the TS algorithm.
 #'  See tsTransform details.
-#' @param fuzzyDist Numeric. Parameter for approximate version of ts algorithm.
+#' @param fuzzyDist Numeric. Parameter for approximate version of ts algorithm. See tsTransform details.
 #' @param verbose Logical. If TRUE, function prints out information about approximate
 #'  computation time
 #' @param ... Catches extra arguments. Not used.
@@ -32,9 +31,8 @@
 #'  MCMC draw, and 't' which gives the within-chain ordering of the MCMC draws.
 #' Each data.frame is a separate chain.
 #'
-#' @export
-tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
-                        fuzzy = FALSE, fuzzyDist = .2, verbose = TRUE, ...){
+tsTransform <- function(mhDraws, distance, minDist = 0,
+                        fuzzy = FALSE, fuzzyDist = 1, verbose = FALSE, ...){
 
   #Combine one level
   allDraws <- do.call('c', mhDraws)
@@ -239,9 +237,9 @@ tsTransform <- function(mhDraws, distance, maxRotations = Inf, minDist = 0,
     return(val)
   })
 
-  #Find best cutpoint (rotate a number of times up to maxRotations)
+  #Find best cutpoint
   #First find total traceplot travel distance for the different rotations
-  overallDists <- sapply(1:min(maxRotations, length(uniqueLabels)), function(r){
+  overallDists <- sapply(1:length(uniqueLabels), function(r){
     #Rotate Yax by r-1 steps, calculate with true distances
     yAxr <- cumsum(c(0, tsDiffs[((1:length(tsDiffs) + (r-2)) %% length(tsDiffs)) + 1]))
 

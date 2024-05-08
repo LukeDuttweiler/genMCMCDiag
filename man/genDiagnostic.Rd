@@ -31,8 +31,8 @@ genDiagnostic(
 which are not equal. See tsTransform details.}
     \item{\code{fuzzy}}{Logical. If TRUE computes an approximate version of the TS algorithm.
 See tsTransform details.}
-    \item{\code{fuzzyDist}}{Numeric. Parameter for approximate version of ts algorithm.}
-    \item{\code{reference}}{Reference point for lanfearTransform (with exact same structure as each MCMC draw)
+    \item{\code{fuzzyDist}}{Numeric. Parameter for approximate version of ts algorithm. See tsTransform details.}
+    \item{\code{reference}}{Argument for method = 'lanfear'. Reference point for lanfearTransform (with exact same structure as each MCMC draw)
 for draw comparison. If left NULL a random point is selected from the given draws.
 See lanfearTransform details.}
   }}
