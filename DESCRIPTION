@@ -16,7 +16,7 @@ Imports:
     ggplot2 (>= 3.0.0),
     coda (>= 0.19.0),
     mcmcse (>= 1.0.0),
-    knitr (>= 1.45),
+    knitr (>= 1.30),
     lifecycle
 Suggests: 
     testthat (>= 3.0.0)
