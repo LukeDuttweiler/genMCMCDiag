@@ -1,9 +1,7 @@
-# genMCMCDiag (development version)
-
 # genMCMCDiag 0.2.1
 
-# genMCMCDiag 0.2.0
-
-# genMCMCDiag 1.0.0
-
 * Initial CRAN submission.
+
+# genMCMCDiag 0.2.2
+
+* Installation issues fixed. R Version requirement removed, knitr requirement lowered.

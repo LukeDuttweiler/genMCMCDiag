@@ -1,14 +1,12 @@
-## Resubmission
-This is a resubmission. In this version I have:
-
-* Removed examples that were taking too long and causing a CMD check note.
-
 ## R CMD check results
 
-0 errors | 0 warnings | 1 notes
-
-* This is a new release.
+0 errors | 0 warnings | 0 notes
    
-## COMMENTS:
+## revdepcheck results
 
-There are currently no references for the methods in this package. The package will be updated with a reference when the paper is submitted and posted to arXiv. 
+We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
+
+
