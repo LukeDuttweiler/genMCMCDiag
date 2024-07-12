@@ -1,3 +1,5 @@
+# genMCMCDiag 0.2.2
+
 # genMCMCDiag 0.2.1
 
 * Initial CRAN submission.
