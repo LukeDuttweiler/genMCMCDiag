@@ -72,7 +72,4 @@ tstL
 tstBN1 <- genDiagnostic(bnMCMCResults, proximityMap = 'lanfear', distance = partitionDist)
 tstBN1
 
-#Example using bayesian network sample data, with 'ts' proximityMap
-tstBN2 <- genDiagnostic(bnMCMCResults, proximityMap = 'ts', distance = partitionDist)
-tstBN2
 }
