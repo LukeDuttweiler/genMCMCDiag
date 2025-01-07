@@ -1,6 +1,8 @@
 # genMCMCDiag (development version)
 
-* Updated language to reflect arXiv paper. 'method' -> 'proximityMap' and 'gelmanRubin' -> 'psrf'
+## Breaking Changes
+
+* Updated language to reflect arXiv paper. `genDiagnostic()` argument `method` is now `proximityMap` and diagnostic `gelmanRubin` is now `psrf`.
 
 # genMCMCDiag 0.2.2
 
