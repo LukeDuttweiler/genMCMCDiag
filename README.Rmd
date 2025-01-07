@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/LukeDuttweiler/genMCMCDiag/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/LukeDuttweiler/genMCMCDiag/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/genMCMCDiag)](https://CRAN.R-project.org/package=genMCMCDiag)
 <!-- badges: end -->
 
 Determining the convergence of Markov Chain Monte Carlo (MCMC) algorithms run on highly-dimensional or un-ordered spaces is an active area of research. This package implements several distance based algorithms for the creation of diagnostics in these situations. A forthcoming paper describes the methodology used in detail. 

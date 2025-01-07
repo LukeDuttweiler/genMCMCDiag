@@ -12,7 +12,7 @@ spsrf(mhDraws, ...)
 \item{...}{Catches unnecessary additional arguments}
 }
 \value{
-Data.frame with 1 row and 2 columns. First entry gives estimated GR statistic, second gives upper 95\% limit for GR statistic.
+Data.frame with 1 row and 2 columns. First entry gives estimated psrf, second gives upper 95\% limit for GR statistic.
 }
 \description{
 Calculate the Gelman-Rubin diagnostic of draws from an MCMC algorithm
