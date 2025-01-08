@@ -1,4 +1,4 @@
-# genMCMCDiag (development version)
+# genMCMCDiag 0.2.3
 
 ## Breaking Changes
 
